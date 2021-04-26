@@ -1,0 +1,42 @@
+id,fullname,email,role
+Z1,Martin Krallinger,martin.krallinger@bsc.es,admin
+Z2,Marta Villegas,marta.villegas@bsc.es,admin
+Z3,Aitor González,aitor.gonzalez@bsc.es,admin
+Z4,Jordi Armengol,jordi.armengol@bsc.es,admin
+Z5,Alejandro Asensio,alejandro.asensio@bsc.es,admin
+Z6,Antonio Miranda,antonio.miranda@bsc.es,admin
+Z7,Marvin Agüero,marvin.aguero@bsc.es,admin
+A1,Angélica Novillo,anovillo74@gmail.com,annotator
+A2,Francisca Valero,franciscavalero@hotmail.com,annotator
+A3,Mónica Aldea,monicaldea@hotmail.com,annotator
+A4,Fabiola Triviño Güiza,f.guiza@ntgs.es,annotator
+A6,Carlos Hortal Muñoz,carloshm1980@gmail.com,annotator
+A7,Luis Quevedo,luisquevedo@educatiosalud.com,annotator
+A12,Carolina Suárez Medina,caritosuarezm@gmail.com,annotator
+G1,Elena Primo,eprimo@isciii.es,guest
+G2,Cristina Bojo,cbojo@isciii.es,guest
+C1,Fabiana Salerno,ban@renal.org.ar,tester
+C2,Floriana Colombo,biblioteca@fleni.org.ar,tester
+C3,Natalia Canova,secretariacientifica@ambb.com.ar,tester
+C4,Verónica Gallo,biblioteca-sspsalud@ms.gba.gov.ar,tester
+C5,Ana Lorena Niño Téllez,lorenin10@gmail.com,tester
+C6,Heidi Elizabeth Molina Arana,heidi.molina@gmail.com,tester
+C7,Valentina Santa Cruz Molina,vsantacruz@incap.int,tester
+C8,Conxi Caro Benito,ccaro@mutuaterrassa.es,tester
+C9,Marcos Antonio Catalán Vega,ma.catalan@pssjd.org,tester
+C10,Rebeca Isabel-Gómez,rebeca.isabel@juntadeandalucia.es,tester
+C11,Carolina Pinín Osorio,carolina.pininosorio@sespa.es,tester
+C12,Alicia Fátima Gómez,aliciaf.gomez@yahoo.com,tester
+C13,Maria Victoria Madrid,vicky.madridg@gmail.com,tester
+C14,Olga Mejia,revistagastro@cable.net.co,tester
+C15,Lucero Pachón,luceropachon@yahoo.com,tester
+C16,Hugo Romo Castillo,hromo@iess.gob.ec,tester
+C17,Juan Vicente Fernández Moreno,juanvicente.fernandez@sjd.es,tester
+C18,Regina de De la Vega,rdedelavega@ufm.edu,tester
+C19,Luis Alvarez Rodríguez,learunsa@hotmail.com,tester
+C20,Sissy Soledad Mena Ordoñez,sissymena@hotmail.com,tester
+C21,Liubenka Obrenovich,liube@cedro.org.pe,tester
+C22,David Villarreal-Zegarra,dvillarrealzegarra@gmail.com,tester
+C23,Damaris V. Tejedor De León,damaris.tejedor@up.ac.pa,tester
+C24,Velkis V. Valdés,velkis.valdes@up.ac.pa,tester
+C25,Carlos Manuel Reyes,cmanuel@infomed.sld.cu,tester

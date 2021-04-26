@@ -1,0 +1,289 @@
+[
+  {
+    "id": "Z1",
+    "fullname": "Martin Krallinger",
+    "email": "martin.krallinger@bsc.es",
+    "role": "admin",
+    "password": "aa1888666a4c79fdf730c8df36b673f9"
+  },
+  {
+    "id": "Z2",
+    "fullname": "Marta Villegas",
+    "email": "marta.villegas@bsc.es",
+    "role": "admin",
+    "password": "7a350649ab7261dcbcfb3df40b54d3ab"
+  },
+  {
+    "id": "Z3",
+    "fullname": "Aitor González",
+    "email": "aitor.gonzalez@bsc.es",
+    "role": "admin",
+    "password": "0be07e72da329e70fc33465944624e67"
+  },
+  {
+    "id": "Z4",
+    "fullname": "Jordi Armengol",
+    "email": "jordi.armengol@bsc.es",
+    "role": "admin",
+    "password": "b3ed09f51017ff994fd6f7f346860a34"
+  },
+  {
+    "id": "Z5",
+    "fullname": "Alejandro Asensio",
+    "email": "alejandro.asensio@bsc.es",
+    "role": "admin",
+    "password": "6e5fd98c642d32b720ff8582b795357c"
+  },
+  {
+    "id": "Z6",
+    "fullname": "Antonio Miranda",
+    "email": "antonio.miranda@bsc.es",
+    "role": "admin",
+    "password": "f1e30aee2a99a6e30c02e42f1c0716ab"
+  },
+  {
+    "id": "Z7",
+    "fullname": "Marvin Agüero",
+    "email": "marvin.aguero@bsc.es",
+    "role": "admin",
+    "password": "9b0371eb8e4a28cb55b835007a1fa881"
+  },
+  {
+    "id": "A1",
+    "fullname": "Angélica Novillo",
+    "email": "anovillo74@gmail.com",
+    "role": "annotator",
+    "password": "7189ba122e1efcef1a0497afd8403299"
+  },
+  {
+    "id": "A2",
+    "fullname": "Francisca Valero",
+    "email": "franciscavalero@hotmail.com",
+    "role": "annotator",
+    "password": "cbfc45a13bf0c22644b2621839db1353"
+  },
+  {
+    "id": "A3",
+    "fullname": "Mónica Aldea",
+    "email": "monicaldea@hotmail.com",
+    "role": "annotator",
+    "password": "5f94456bd341f05d015802f9d6655874"
+  },
+  {
+    "id": "A4",
+    "fullname": "Fabiola Triviño Güiza",
+    "email": "f.guiza@ntgs.es",
+    "role": "annotator",
+    "password": "6179a8a3becf971cf37f5900b91ad681"
+  },
+  {
+    "id": "A6",
+    "fullname": "Carlos Hortal Muñoz",
+    "email": "carloshm1980@gmail.com",
+    "role": "annotator",
+    "password": "57bc56ea43e9eb17cd369449ff65a962"
+  },
+  {
+    "id": "A7",
+    "fullname": "Luis Quevedo",
+    "email": "luisquevedo@educatiosalud.com",
+    "role": "annotator",
+    "password": "622140731b19fc85f5ee5ebb40e07cb7"
+  },
+  {
+    "id": "A12",
+    "fullname": "Carolina Suárez Medina",
+    "email": "caritosuarezm@gmail.com",
+    "role": "annotator",
+    "password": "7ce7359afe39cfe9a36e18dbe40dae4d"
+  },
+  {
+    "id": "G1",
+    "fullname": "Elena Primo",
+    "email": "eprimo@isciii.es",
+    "role": "guest",
+    "password": "ed5458cca161c8cff8e22f292a59f04a"
+  },
+  {
+    "id": "G2",
+    "fullname": "Cristina Bojo",
+    "email": "cbojo@isciii.es",
+    "role": "guest",
+    "password": "e96eddfb2586139e453536d332ac6bca"
+  },
+  {
+    "id": "C1",
+    "fullname": "Fabiana Salerno",
+    "email": "ban@renal.org.ar",
+    "role": "tester",
+    "password": "3b3d8f939780645f25c6e4264686dec2"
+  },
+  {
+    "id": "C2",
+    "fullname": "Floriana Colombo",
+    "email": "biblioteca@fleni.org.ar",
+    "role": "tester",
+    "password": "c50b1f04d176ee961a3d68fdd33a8eb4"
+  },
+  {
+    "id": "C3",
+    "fullname": "Natalia Canova",
+    "email": "secretariacientifica@ambb.com.ar",
+    "role": "tester",
+    "password": "fdee795bcd893ecc4b86cdb4e0da489e"
+  },
+  {
+    "id": "C4",
+    "fullname": "Verónica Gallo",
+    "email": "biblioteca-sspsalud@ms.gba.gov.ar",
+    "role": "tester",
+    "password": "7e64adf2497ff822447b9ebfeec395a7"
+  },
+  {
+    "id": "C5",
+    "fullname": "Ana Lorena Niño Téllez",
+    "email": "lorenin10@gmail.com",
+    "role": "tester",
+    "password": "cb2a66b4afece7b5c044f8d2f3120b6b"
+  },
+  {
+    "id": "C6",
+    "fullname": "Heidi Elizabeth Molina Arana",
+    "email": "heidi.molina@gmail.com",
+    "role": "tester",
+    "password": "fd54c1feb8af05bc00270fe67b05b6bb"
+  },
+  {
+    "id": "C7",
+    "fullname": "Valentina Santa Cruz Molina",
+    "email": "vsantacruz@incap.int",
+    "role": "tester",
+    "password": "c7eb25c1c56bc689d4b59e7644aae5c5"
+  },
+  {
+    "id": "C8",
+    "fullname": "Conxi Caro Benito",
+    "email": "ccaro@mutuaterrassa.es",
+    "role": "tester",
+    "password": "f91eea8ff4d0c43c748c0468769a8b76"
+  },
+  {
+    "id": "C9",
+    "fullname": "Marcos Antonio Catalán Vega",
+    "email": "ma.catalan@pssjd.org",
+    "role": "tester",
+    "password": "b47f8011c51ede93bc5945fb0abce8d2"
+  },
+  {
+    "id": "C10",
+    "fullname": "Rebeca Isabel-Gómez",
+    "email": "rebeca.isabel@juntadeandalucia.es",
+    "role": "tester",
+    "password": "e93b0a0c3af531cd70c3096e35f9dab0"
+  },
+  {
+    "id": "C11",
+    "fullname": "Carolina Pinín Osorio",
+    "email": "carolina.pininosorio@sespa.es",
+    "role": "tester",
+    "password": "111262462345382305a470168074a52a"
+  },
+  {
+    "id": "C12",
+    "fullname": "Alicia Fátima Gómez",
+    "email": "aliciaf.gomez@yahoo.com",
+    "role": "tester",
+    "password": "391cd5d2d559a788016d0780fe873df3"
+  },
+  {
+    "id": "C13",
+    "fullname": "Maria Victoria Madrid",
+    "email": "vicky.madridg@gmail.com",
+    "role": "tester",
+    "password": "21e55a5b4b20915fd5dd1b7abcb1fe35"
+  },
+  {
+    "id": "C14",
+    "fullname": "Olga Mejia",
+    "email": "revistagastro@cable.net.co",
+    "role": "tester",
+    "password": "4f62fea095aa22a6cb12bfa8affcea9e"
+  },
+  {
+    "id": "C15",
+    "fullname": "Lucero Pachón",
+    "email": "luceropachon@yahoo.com",
+    "role": "tester",
+    "password": "66d3d57cd27534c685afb15e4c40e859"
+  },
+  {
+    "id": "C16",
+    "fullname": "Hugo Romo Castillo",
+    "email": "hromo@iess.gob.ec",
+    "role": "tester",
+    "password": "ba68ea41c04ed1d8c19aaa271d8fce4b"
+  },
+  {
+    "id": "C17",
+    "fullname": "Juan Vicente Fernández Moreno",
+    "email": "juanvicente.fernandez@sjd.es",
+    "role": "tester",
+    "password": "116229b073c98125f3560be9633c9552"
+  },
+  {
+    "id": "C18",
+    "fullname": "Regina de De la Vega",
+    "email": "rdedelavega@ufm.edu",
+    "role": "tester",
+    "password": "c1967b6a889f94d40d8b565dde4f75d6"
+  },
+  {
+    "id": "C19",
+    "fullname": "Luis Alvarez Rodríguez",
+    "email": "learunsa@hotmail.com",
+    "role": "tester",
+    "password": "dac2e0abba99ec9ba1088f9abaca2710"
+  },
+  {
+    "id": "C20",
+    "fullname": "Sissy Soledad Mena Ordoñez",
+    "email": "sissymena@hotmail.com",
+    "role": "tester",
+    "password": "453b9d1b4c68d017badbcad40e4cbb4c"
+  },
+  {
+    "id": "C21",
+    "fullname": "Liubenka Obrenovich",
+    "email": "liube@cedro.org.pe",
+    "role": "tester",
+    "password": "47800e88fc55530f7ff215faf5410712"
+  },
+  {
+    "id": "C22",
+    "fullname": "David Villarreal-Zegarra",
+    "email": "dvillarrealzegarra@gmail.com",
+    "role": "tester",
+    "password": "730c7296ca2201c77134f55a1ea9466d"
+  },
+  {
+    "id": "C23",
+    "fullname": "Damaris V. Tejedor De León",
+    "email": "damaris.tejedor@up.ac.pa",
+    "role": "tester",
+    "password": "a3237c785b621f737297bbdf7dbc93c3"
+  },
+  {
+    "id": "C24",
+    "fullname": "Velkis V. Valdés",
+    "email": "velkis.valdes@up.ac.pa",
+    "role": "tester",
+    "password": "e92af500ddf014c81e59177fb2f9194d"
+  },
+  {
+    "id": "C25",
+    "fullname": "Carlos Manuel Reyes",
+    "email": "cmanuel@infomed.sld.cu",
+    "role": "tester",
+    "password": "d60013f52f4634fb97012b6f4150571b"
+  }
+]

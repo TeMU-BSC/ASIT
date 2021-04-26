@@ -1,0 +1,100 @@
+// mat-select options are partly hidden if text is too long
+// https://github.com/angular/components/issues/12779#issuecomment-419467778
+.mat-select-panel mat-option.mat-option {
+  line-height: initial;
+}
+.mat-option-text.mat-option-text {
+  white-space: normal;
+}
+
+.mat-toolbar {
+  background-color: transparent;
+
+  .logo {
+    transform: scale(1.5);
+  }
+
+  .logo,
+  .title {
+    cursor: pointer;
+  }
+}
+
+// https://github.com/angular/components/blob/2f61895659776f3be2734de0df70966e0754d984/src/material/button/button.scss#L17
+.mat-icon-button {
+  &:hover:not(.mat-button-disabled) .mat-button-focus-overlay {
+    opacity: 0.04;
+  }
+}
+
+.mat-tooltip {
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: #808080;
+  white-space: pre-line;
+}
+
+.search-bar {
+  &.mat-form-field {
+    width: 37%;
+    font-size: initial;
+  }
+
+  .mat-form-field-outline-start {
+    display: none;
+  }
+
+  .mat-form-field-outline-end {
+    border: none !important;
+    border-radius: 0.5rem !important;
+    background-color: $skyblue;
+  }
+
+  .mat-form-field-wrapper {
+    padding: 0;
+    width: 100%;
+  }
+
+  .mat-form-field-prefix {
+    margin-right: 0.5rem;
+  }
+
+  .mat-form-field-infix {
+    border: 0;
+  }
+}
+
+.mat-drawer-container {
+  // mat-toolbar is 4rem tall
+  // mat-divider is 1px tall
+  height: calc(100% - 4rem - 1px);
+  background-color: transparent;
+
+  .mat-drawer {
+    width: 16rem;
+    border-right: none;
+    padding-right: 0.5rem;
+    background-color: $lightblue;
+
+    .mat-drawer-inner-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+  }
+}
+
+.mat-selection-list {
+  width: 100%;
+
+  .mat-list-option {
+    height: 2.5rem !important;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+
+    .mat-list-text {
+      font-size: 0.9rem;
+    }
+  }
+}

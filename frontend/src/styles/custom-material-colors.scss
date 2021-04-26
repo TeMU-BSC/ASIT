@@ -1,0 +1,109 @@
+// Basic material colors (sass variables accessible).
+$primary: mat-color($indexer-primary);
+$accent: mat-color($indexer-accent);
+$warn: mat-color($indexer-warn);
+
+// Additional palettes.
+$indexer-secondary: mat-palette($mat-grey);
+$indexer-terciary: mat-palette($mat-yellow);
+$indexer-success: mat-palette($mat-green);
+$indexer-info: mat-palette($mat-blue);
+
+// Additinal colors.
+$secondary: mat-color($indexer-secondary);
+$terciary: mat-color($indexer-terciary);
+$success: mat-color($indexer-success);
+$info: mat-color($indexer-info);
+
+// Ictusnet exact colors.
+$indigo: #174489;
+$orange: #ce612f;
+$lightblue: #f7fcff;
+$skyblue: #dceaff;
+
+// https://github.com/angular/components/issues/11888#issuecomment-536509515
+$custom-collection: (
+  secondary: mat-color($indexer-secondary),
+  terciary: mat-color($indexer-terciary),
+  success: mat-color($indexer-success),
+  info: mat-color($indexer-info),
+  contrast: (
+    secondary: mat-contrast($mat-grey, 600),
+    terciary: mat-contrast($mat-yellow, 600),
+    success: mat-contrast($mat-green, 600),
+    info: mat-contrast($mat-blue, 600),
+  ),
+);
+$indexer-custom: mat-palette($custom-collection, custom);
+$indexer-theme: map_merge(
+  $indexer-theme,
+  (
+    custom: $indexer-custom,
+  )
+);
+$custom: map-get($indexer-theme, custom);
+
+// Append custom colors to material classes.
+.mat-secondary {
+  &.mat-button,
+  &.mat-stroked-button,
+  &.mat-icon-button,
+  &.mat-icon {
+    color: mat-color($custom, secondary);
+  }
+  &.mat-raised-button,
+  &.mat-flat-button,
+  &.mat-fab-button,
+  &.mat-mini-fab {
+    color: mat-color($custom, secondary-contrast);
+    background-color: mat-color($custom, secondary);
+  }
+}
+
+.mat-terciary {
+  &.mat-button,
+  &.mat-stroked-button,
+  &.mat-icon-button,
+  &.mat-icon {
+    color: mat-color($custom, terciary);
+  }
+  &.mat-raised-button,
+  &.mat-flat-button,
+  &.mat-fab-button,
+  &.mat-mini-fab {
+    color: mat-color($custom, terciary-contrast);
+    background-color: mat-color($custom, terciary);
+  }
+}
+
+.mat-success {
+  &.mat-button,
+  &.mat-stroked-button,
+  &.mat-icon-button,
+  &.mat-icon {
+    color: mat-color($custom, success);
+  }
+  &.mat-raised-button,
+  &.mat-flat-button,
+  &.mat-fab-button,
+  &.mat-mini-fab {
+    color: mat-color($custom, success-contrast);
+    background-color: mat-color($custom, success);
+  }
+}
+
+.mat-info {
+  &.mat-button,
+  &.mat-stroked-button,
+  &.mat-icon-button,
+  &.mat-icon {
+    color: mat-color($custom, info);
+  }
+  &.mat-raised-button,
+  &.mat-flat-button,
+  &.mat-fab-button,
+  &.mat-mini-fab {
+    color: mat-color($custom, info-contrast);
+    background-color: mat-color($custom, info);
+  }
+}

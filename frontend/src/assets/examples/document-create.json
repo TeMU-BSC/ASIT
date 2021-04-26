@@ -1,0 +1,30 @@
+[
+  {
+    "identifier": "identificador-del-documento-1",
+    "title": "Título del documento 1",
+    "abstract": "Abstract del documento 1.",
+    "source": "ibecs",
+    "type": "article"
+  },
+  {
+    "identifier": "identificador-del-documento-2",
+    "title": "Título del documento 2",
+    "abstract": "Abstract del documento 2.",
+    "source": "lilacs",
+    "type": "article"
+  },
+  {
+    "identifier": "identificador-del-documento-3",
+    "title": "Título del documento 3",
+    "abstract": "Abstract del documento 3.",
+    "source": "reec",
+    "type": "clinical study"
+  },
+  {
+    "identifier": "identificador-del-documento-4",
+    "title": "Título del documento 4",
+    "abstract": "Abstract del documento 4.",
+    "source": "google patents",
+    "type": "patent"
+  }
+]

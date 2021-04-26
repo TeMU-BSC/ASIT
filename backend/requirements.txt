@@ -1,0 +1,6 @@
+flask
+flask-cors
+flask-paginate
+flask-pymongo
+lorem-text
+uwsgi

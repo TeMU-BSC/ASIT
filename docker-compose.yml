@@ -1,0 +1,32 @@
+services:
+
+    mongo:
+      container_name: asit_mongo
+      image: mongo:4.4.4-bionic
+      ports:
+        - 27018:27017
+      entrypoint: mongod --bind_ip_all
+      volumes:
+        - ./database/mongodb:/data/db
+  
+    flask:
+      container_name: asit_flask
+      build: ./backend
+      env_file:
+        - .env/flask.env
+      ports:
+        - 5000:5000
+      command: flask run --host 0.0.0.0
+      volumes:
+        - ./backend:/app
+  
+    angular:
+      container_name: asit_angular
+      image: node:14.16.0-alpine
+      working_dir: /app
+      ports:
+        - 4200:4200
+      command: npm run dev
+      volumes:
+        - ./frontend:/app
+  

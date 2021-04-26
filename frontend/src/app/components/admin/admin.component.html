@@ -1,0 +1,59 @@
+<!-- <div
+  fxLayout="column"
+  fxLayoutAlign="start start"
+  fxLayoutGap="1rem"
+  style="padding: 3em"
+>
+  <h1 style="margin-bottom: 2em">Panel de Administrador</h1>
+  <mat-form-field appearance="fill">
+    <mat-label>Proyecto</mat-label>
+    <mat-select #project [value]="projects[0]">
+      <mat-option *ngFor="let project of projects" [value]="project">
+        {{ project.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Acción</mat-label>
+    <mat-select #selectedAction>
+      <mat-option *ngFor="let action of actions" [value]="action">
+        {{ action.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div *ngIf="selectedAction.value">
+    <p>Ejemplo de estructura del fichero JSON:</p>
+    <pre class="example-snippet">{{
+      selectedAction.value.jsonSnippet | json
+    }}</pre>
+    <form fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="1rem">
+      <mat-form-field appearance="fill">
+        <mat-label>Fichero JSON</mat-label>
+        <ngx-mat-file-input
+          #removableInput
+          [accept]="'.json'"
+          (change)="onFileSelected($event)"
+        ></ngx-mat-file-input>
+        <button
+          mat-icon-button
+          matSuffix
+          *ngIf="!removableInput.empty"
+          (click)="removableInput.clear($event)"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+        <mat-icon matSuffix>attach_file</mat-icon>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="removableInput.empty"
+        (click)="selectedAction.value.method()"
+      >
+        {{ selectedAction.value?.name }}
+      </button>
+    </form>
+  </div>
+</div> -->
+
+<app-sidenav></app-sidenav>

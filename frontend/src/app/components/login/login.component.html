@@ -1,0 +1,16 @@
+<h1>Inicio de sesión</h1>
+<form>
+  <p>
+    <mat-form-field>
+      <input matInput placeholder="Email" [(ngModel)]="email" name="email" autofocus>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Contraseña" [(ngModel)]="password" name="password" autocomplete="on">
+    </mat-form-field>
+  </p>
+  <button mat-raised-button color="primary" (click)="auth.login(email, password)">
+    Iniciar sesión
+  </button>
+</form>

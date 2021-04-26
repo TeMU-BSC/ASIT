@@ -1,0 +1,77 @@
+[
+  {
+    "fullname": "Alice",
+    "email": "alice@indexer.app",
+    "role": "annotator",
+    "password": "passwd0fAl1c3",
+    "assigned_document_identifiers": [
+      "G4BWDV",
+      "0NFKBQ",
+      "RJVVW3",
+      "I6YR5S",
+      "C63MKG",
+      "XO5QDZ",
+      "VFWOC4",
+      "0UKJ9M",
+      "8EMS9F",
+      "C7BG3S",
+      "4RF1FG",
+      "105EB4",
+      "LCS7NA",
+      "ASOBOB",
+      "2EZ8UV",
+      "PUSIBS",
+      "A5ULD2"
+    ]
+  },
+  {
+    "fullname": "Bob",
+    "email": "bob@indexer.app",
+    "role": "annotator",
+    "password": "passwd0fB0b",
+    "assigned_document_identifiers": [
+      "G4BWDV",
+      "0NFKBQ",
+      "RJVVW3",
+      "I6YR5S",
+      "C63MKG",
+      "XO5QDZ",
+      "VFWOC4",
+      "0UKJ9M",
+      "8EMS9F",
+      "C7BG3S",
+      "4RF1FG",
+      "105EB4",
+      "LCS7NA",
+      "ASOBOB",
+      "2EZ8UV",
+      "PUSIBS",
+      "A5ULD2"
+    ]
+  },
+  {
+    "fullname": "Eve",
+    "email": "eve@indexer.app",
+    "role": "admin",
+    "password": "passwd0f3v3",
+    "assigned_document_identifiers": [
+      "G4BWDV",
+      "0NFKBQ",
+      "RJVVW3",
+      "I6YR5S",
+      "C63MKG",
+      "XO5QDZ",
+      "VFWOC4",
+      "0UKJ9M",
+      "8EMS9F",
+      "C7BG3S",
+      "4RF1FG",
+      "105EB4",
+      "LCS7NA",
+      "ASOBOB",
+      "2EZ8UV",
+      "PUSIBS",
+      "A5ULD2"
+    ]
+  }
+]

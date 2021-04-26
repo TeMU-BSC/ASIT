@@ -1,0 +1,23 @@
+<mat-toolbar color="primary" class="mat-elevation-z4" style="position: relative;">
+  <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+    <button mat-button routerLink="/">
+      <mat-icon style="margin-right: 0.5em;">assignment</mat-icon>
+      Indizador del Plan TL
+    </button>
+    <button *ngIf="!auth.isLoggedIn()" mat-button routerLink="login">
+      Iniciar sesión
+    </button>
+    <div *ngIf="auth.isLoggedIn()">
+      <button mat-icon-button matTooltip="{{auth.getCurrentUser().fullname}}"
+        [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="auth.logout()">
+          <mat-icon color="warn">power_settings_new</mat-icon>
+          <span>Cerrar sesión</span>
+        </button>
+      </mat-menu>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

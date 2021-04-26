@@ -1,0 +1,10 @@
+<div fxLayout="column" style="max-width: 100ch;">
+  <h2>{{ doc.title }} <span style="font-size: smaller; color: grey;">({{ doc.identifier }})</span></h2>
+  <p style="line-height: 1.5;">{{ doc.abstract }}</p>
+  <app-terms [doc]="doc" [formConfig]="formConfigTerms" [removable]="!doc.completed"></app-terms>
+  <button mat-raised-button color="primary" [disabled]="doc.completed" (click)="confirmDialogBeforeMark('complete')"
+    fxFlexAlign="start">
+    <span *ngIf="!doc.completed">Marcar como completado</span>
+    <span *ngIf="doc.completed">Completado</span>
+  </button>
+</div>

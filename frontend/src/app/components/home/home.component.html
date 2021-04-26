@@ -1,0 +1,46 @@
+<section fxLayout="column" fxLayoutAlign="center">
+  <div class="bg-primary font-white text-centered">
+    <h1 style="font-weight: bold; line-height: normal; margin-bottom: 0;">Indizador del Plan TL</h1>
+    <p style="font-size: 1.3rem; font-weight: lighter;">
+      Asigna términos controlados a diferentes tipos de documentos
+    </p>
+    <div style="margin-bottom: 5rem;">
+      <div *ngIf="!auth.isLoggedIn()" class="buttons">
+        <button mat-raised-button routerLink="login">
+          Iniciar sesión
+        </button>
+      </div>
+      <div *ngIf="auth.isLoggedIn()" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="1em" class="buttons">
+        <button *ngIf="auth.getCurrentUser().role === 'annotator'" mat-raised-button routerLink="/docs">
+          Ver mis documentos asignados
+        </button>
+        <button *ngIf="auth.getCurrentUser().role === 'admin'" mat-raised-button color="warn" routerLink="/admin">
+          Ir al panel de administración
+        </button>
+      </div>
+    </div>
+  </div>
+  <div style="font-size: 1rem; padding: 5rem 1rem; width: 36rem; align-self: center;">
+    <p>
+      Indizar consiste en asignar etiquetas controladas (términos de una lista con códigos asociados) a un documento de
+      texto teniendo en cuenta el contenido de éste.
+    </p>
+    <p>
+      Esta herramienta web facilita el proceso de adjudicar códigos (que actúan como etiquetas) a diferentes documentos,
+      de los cuales se muestra su título y su <i>abstract</i> (resumen).
+    </p>
+    <h2 style="margin-top: 2rem;">
+      Explora algunas terminologías
+    </h2>
+    <div fxLayout fxLayoutGap="0.5rem">
+      <a mat-flat-button [href]="link.decs" style="text-decoration: none; background-color: #669966; color: white;">
+        <span>DeCS</span>
+        <mat-icon style="margin-left: 0.5rem;">open_in_new</mat-icon>
+      </a>
+      <a mat-flat-button [href]="link.hpo" style="text-decoration: none; background-color: #29657C; color: white;">
+        <span>HPO</span>
+        <mat-icon style="margin-left: 0.5rem;">open_in_new</mat-icon>
+      </a>
+    </div>
+  </div>
+</section>

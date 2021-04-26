@@ -1,0 +1,37 @@
+services:
+
+  mongo:
+    container_name: asit_mongo
+    image: mongo:4.4.4-bionic
+    ports:
+      - 27018:27017
+    entrypoint: mongod --bind_ip_all
+    volumes:
+      - ./database/mongodb:/data/db
+      # - /data/mongodb:/data/db
+
+  flask:
+    container_name: asit_flask
+    build: ./backend
+    env_file:
+      - .env/flask.env
+    ports:
+      - 5000:5000
+    command: flask run --host 0.0.0.0
+    volumes:
+      - ./backend:/app
+    # env_file:
+    #   - .env/flask.production.env
+    # ports:
+    #   - 8080:8080
+    # command: uwsgi app.ini
+    # restart: always
+
+  angular:
+    container_name: asit_angular_production
+    build: ./frontend
+    depends_on:
+      - flask
+    ports:
+      - 80:80
+    restart: always

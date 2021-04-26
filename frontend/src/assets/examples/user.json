@@ -1,0 +1,14 @@
+[
+  {
+    "id": "id-del-usuario",
+    "fullname": "Nombre Apellido",
+    "email": "nombre.apellido@ejemplo.com",
+    "role": "annotator",
+    "password": "contraseña-supersecreta",
+    "assigned_document_identifiers": [
+      "identificador-del-documento-1",
+      "identificador-del-documento-2",
+      "identificador-del-documento-3"
+    ]
+  }
+]

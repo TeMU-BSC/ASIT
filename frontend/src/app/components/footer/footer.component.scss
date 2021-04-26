@@ -1,0 +1,30 @@
+// https://medium.com/@aleixsuau/how-to-use-angular-material-2-sass-variables-in-your-components-76ce0203f126
+
+.footer {
+  color: white;
+  text-align: center;
+  padding: 1em;
+}
+
+a {
+  color: white;
+}
+
+fa-icon {
+  font-size: xx-large;
+}
+
+.plantl-logo {
+  background-color: #f8f9fa;
+  max-height: 6.5em;
+}
+
+// bootstrap.css
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.rounded {
+  border-radius: 0.25rem !important;
+}
