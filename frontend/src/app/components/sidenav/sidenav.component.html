@@ -1,47 +1,131 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
+<div
+  class="example-container"
+  [class.example-is-mobile]="mobileQuery.matches"
+  *ngIf="shouldRun"
+>
   <mat-toolbar color="primary" class="example-toolbar">
-    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-    <h1 class="example-app-name">Admin Panel</h1>
-    <button *ngIf="!auth.isLoggedIn()" mat-button routerLink="login">
-      Iniciar sesión
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
     </button>
-    <div *ngIf="auth.isLoggedIn()">
-      <button mat-icon-button matTooltip="{{auth.getCurrentUser().fullname}}"
-        [matMenuTriggerFor]="menu">
-        <mat-icon>account_circle</mat-icon>
+    <h1 class="example-app-name">Admin Panel</h1>
+    <div class="login">
+      <button *ngIf="!auth.isLoggedIn()" mat-button routerLink="login">
+        Iniciar sesión
       </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="auth.logout()">
-          <mat-icon color="warn">power_settings_new</mat-icon>
-          <span>Cerrar sesión</span>
+      <div *ngIf="auth.isLoggedIn()">
+        <button
+          mat-icon-button
+          matTooltip="{{ auth.getCurrentUser().fullname }}"
+          [matMenuTriggerFor]="menu"
+        >
+          <mat-icon>account_circle</mat-icon>
         </button>
-      </mat-menu>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="auth.logout()">
+            <mat-icon color="warn">power_settings_new</mat-icon>
+            <span>Cerrar sesión</span>
+          </button>
+        </mat-menu>
+      </div>
     </div>
   </mat-toolbar>
 
-  <mat-sidenav-container class="example-sidenav-container"
-                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56"
-
-                >
-      <mat-nav-list  >
-        <a mat-list-item routerLink="." *ngFor="let nav of fillerNav" (click)="changeContent(nav.name)">
+  <mat-sidenav-container
+    class="example-sidenav-container"
+    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+  >
+    <mat-sidenav
+      #snav
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+    >
+      <mat-nav-list>
+        <a
+          mat-list-item
+          routerLink="."
+          *ngFor="let nav of fillerNav"
+          (click)="changeContent(nav.name)"
+        >
           <mat-icon>
-            {{nav.icon}}
+            {{ nav.icon }}
           </mat-icon>
-          {{nav.name}}
+          {{ nav.name }}
         </a>
       </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <p *ngFor="let content of fillerContent">{{content}}</p>
+      <p *ngFor="let content of fillerContent">{{ content }}</p>
+      <div *ngIf="fillerContent[0] == 'Home'">
+        <div
+          fxLayout="column"
+          fxLayoutAlign="start start"
+          fxLayoutGap="1rem"
+          style="padding: 3em"
+        >
+          <h1 style="margin-bottom: 2em">Panel de Administrador</h1>
+          <mat-form-field appearance="fill">
+            <mat-label>Proyecto</mat-label>
+            <mat-select #project [value]="projects[0]">
+              <mat-option *ngFor="let project of projects" [value]="project">
+                {{ project.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Acción</mat-label>
+            <mat-select #selectedAction>
+              <mat-option *ngFor="let action of actions" [value]="action">
+                {{ action.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div *ngIf="selectedAction.value">
+            <p>Ejemplo de estructura del fichero JSON:</p>
+            <pre class="example-snippet">{{
+              selectedAction.value.jsonSnippet | json
+            }}</pre>
+            <form
+              fxLayout="column"
+              fxLayoutAlign="start start"
+              fxLayoutGap="1rem"
+            >
+              <mat-form-field appearance="fill">
+                <mat-label>Fichero JSON</mat-label>
+                <ngx-mat-file-input
+                  #removableInput
+                  [accept]="'.json'"
+                  (change)="onFileSelected($event)"
+                ></ngx-mat-file-input>
+                <button
+                  mat-icon-button
+                  matSuffix
+                  *ngIf="!removableInput.empty"
+                  (click)="removableInput.clear($event)"
+                >
+                  <mat-icon>clear</mat-icon>
+                </button>
+                <mat-icon matSuffix>attach_file</mat-icon>
+              </mat-form-field>
+              <button
+                mat-raised-button
+                color="primary"
+                [disabled]="removableInput.empty"
+                (click)="selectedAction.value.method()"
+              >
+                {{ selectedAction.value?.name }}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="fillerContent[0] == 'User'">
+        <app-admin-users></app-admin-users>
+      </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
-
-
 
 <!-- Copyright 2020 Google LLC. All Rights Reserved.
     Use of this source code is governed by an MIT-style license that

@@ -12,10 +12,10 @@ import { LoginComponent } from './components/login/login.component'
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'admin', component: AdminComponent },
-  // { path: 'admin', component: AdminComponent, canActivate: [AuthService, AuthAdminService] },
+ // { path: 'admin', component: AdminComponent, canActivate: [AuthService, AuthAdminService] },
   { path: 'login', component: LoginComponent },
   { path: 'docs', component: DocsComponent, canActivate: [AuthService] },
-  { path: 'doc/:id', component: DocDetailComponent, canActivate: [AuthService] },
+  { path: 'doc/:id', component: DocDetailComponent, canActivate: [AuthService]},
 ]
 
 @NgModule({

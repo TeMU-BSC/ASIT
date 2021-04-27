@@ -1,0 +1,31 @@
+
+<div fxLayout="column" style="padding-top: 1rem;">
+  <smc-simplemattable
+    [data]="users"
+    [columns]="columns"
+    [loading]="loading"
+    [sorting]="true"
+    [paginator]="true"
+    [paginatorPageSize]="10"
+    [paginatorPageSizeOptions]="[10, 15, 20, 25, 50, 100]"
+    [paginatorLength]="paginatorLength"
+    [backendPagination]="true"
+    (page)="refresh($event)"
+    [rowClickable]="true"
+  >
+  </smc-simplemattable>
+  <!--
+    (rowClick)="selectDoc($event)"
+    (page)="refresh($event)"
+
+
+    <app-doc
+    *ngIf="selectedDoc"
+    [doc]="selectedDoc"
+    (completed)="refresh()"
+    (validated)="refresh()"
+    fxFlexAlign="center"
+    style="padding: 2rem 0;"
+    >
+  </app-doc> -->
+</div>

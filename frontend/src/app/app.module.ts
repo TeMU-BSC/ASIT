@@ -26,7 +26,9 @@ import { TermsComponent } from './components/terms/terms.component'
 import { DocDetailComponent } from './components/doc-detail/doc-detail.component'
 // import { HighlightPipe } from './pipes/highlight.pipe'
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
-import { SidenavComponent } from './components/sidenav/sidenav.component'
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { AdminUsersComponent } from './components/admin-users/admin-users.component';
+
 
 
 @NgModule({
@@ -45,6 +47,8 @@ import { SidenavComponent } from './components/sidenav/sidenav.component'
     // HighlightPipe,
     SafeHtmlPipe,
     SidenavComponent,
+    AdminUsersComponent,
+
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { environment } from 'src/environments/environment'
 import { _sortByOrder } from 'src/app/helpers/functions'
-import { ApiResponse, Document, Annotation, Term } from 'src/app/models/interfaces'
+import { ApiResponse, Document, Annotation, Term, User} from 'src/app/models/interfaces'
 
 @Injectable({
   providedIn: 'root'
@@ -75,6 +75,9 @@ export class ApiService {
 
   getDoc(id: string): Observable<Document> {
     return this.http.get<Document>(`${this.url}/doc/${id}`)
+  }
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}/user?multiple=true`)
   }
 
 }
