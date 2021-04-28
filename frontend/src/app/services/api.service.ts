@@ -76,8 +76,9 @@ export class ApiService {
   getDoc(id: string): Observable<Document> {
     return this.http.get<Document>(`${this.url}/doc/${id}`)
   }
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.url}/user?multiple=true`)
+  getUsers(query: any): Observable<User[]> {
+    const { userEmail, pageSize, pageIndex } = query
+    return this.http.get<User[]>(`${this.url}/list/user?page_size=${pageSize}&page_index=${pageIndex}`)
   }
 
 }

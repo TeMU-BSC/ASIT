@@ -111,6 +111,27 @@ def get_assigned_documents_to_user(email):
         document['completed'] = document.get('identifier') in completed_document_ids
     return jsonify(documents=documents, total_document_count=total_document_count)
 
+@app.route('/list/<item>', methods=['GET'])
+def get_item_list(item):
+    collection = f'{item}s'
+    success = False
+    query_filter = request.json
+    try:
+        limit = int(request.args.get('page_size')) 
+    except:
+        limit = 0
+    try:
+        skip = int(request.args.get('page_index')) * limit
+    except:
+        skip = 0
+    found_documents = mongo.db[collection].find(query_filter)
+    documents = list(found_documents.skip(skip).limit(limit))
+    for document in documents:
+            document['generation_time'] = iso_format(document['_id'])
+            document['_id'] = str(document['_id'])
+    response = documents
+    total_document_count = found_documents.count()
+    return jsonify(items=documents, total_items_count=total_document_count)
 
 # CRUD (Create, Read, Update, Delete) routes for items `user`, `document`, `term`, `annotation`.
 

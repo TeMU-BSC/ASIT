@@ -43,9 +43,13 @@ export class AdminUsersComponent implements OnInit {
 
   refresh(event?: PageEvent) {
     this.loading = true
-    this.api.getUsers().subscribe(
+    this.api.getUsers({
+      pageSize: event?.pageSize,
+      pageIndex: event?.pageIndex,
+    }).subscribe(
       response => {
-       this.users = response
+       this.users = response['items']
+       this.paginatorLength = response['total_items_count']
       },
       error => console.error(error),
       () => this.loading = false
