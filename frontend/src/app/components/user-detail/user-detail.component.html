@@ -1,0 +1,17 @@
+<mat-card>
+  <h1>{{user.fullname}}'s Info</h1>
+
+<h3>Email: {{user.email}}</h3>
+<h3>Password: {{user.password}}</h3>
+<h3>Role: {{user.role}}</h3>
+<h3>Assigned Documents: {{user.assigned_document_identifiers}}</h3>
+<select name="mySelection">
+<option [value]="user.assigned_document_identifiers" *ngFor="let item of user.assigned_document_identifiers" >
+{{item}}
+</option>
+</select>
+
+
+</mat-card>
+
+

@@ -8,10 +8,10 @@ import { AuthService } from './services/auth.service'
 import { AuthAdminService } from './services/auth-admin.service'
 import { DocDetailComponent } from './components/doc-detail/doc-detail.component'
 import { LoginComponent } from './components/login/login.component'
-
+import { SidenavComponent } from './components/sidenav/sidenav.component'
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: 'admin', component: SidenavComponent },
  // { path: 'admin', component: AdminComponent, canActivate: [AuthService, AuthAdminService] },
   { path: 'login', component: LoginComponent },
   { path: 'docs', component: DocsComponent, canActivate: [AuthService] },

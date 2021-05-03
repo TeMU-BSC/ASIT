@@ -38,7 +38,7 @@ export class AdminUsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.refresh()
   }
 
   refresh(event?: PageEvent) {
@@ -54,6 +54,10 @@ export class AdminUsersComponent implements OnInit {
       error => console.error(error),
       () => this.loading = false
     )
+  }
+
+  selectUser(row: User) {
+    this.selectedUser = row
   }
 
 }

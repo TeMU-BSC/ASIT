@@ -12,20 +12,16 @@
     [backendPagination]="true"
     (page)="refresh($event)"
     [rowClickable]="true"
+    (rowClick)="selectUser($event)"
   >
   </smc-simplemattable>
-  <!--
-    (rowClick)="selectDoc($event)"
-    (page)="refresh($event)"
-
-
-    <app-doc
-    *ngIf="selectedDoc"
-    [doc]="selectedDoc"
-    (completed)="refresh()"
-    (validated)="refresh()"
+    <app-user-detail
+    *ngIf="selectedUser"
+    [user]="selectedUser"
     fxFlexAlign="center"
     style="padding: 2rem 0;"
     >
-  </app-doc> -->
+
+    </app-user-detail>
+
 </div>

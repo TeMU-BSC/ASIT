@@ -28,6 +28,7 @@ import { DocDetailComponent } from './components/doc-detail/doc-detail.component
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { AdminUsersComponent } from './components/admin-users/admin-users.component';
+import { UserDetailComponent } from './components/user-detail/user-detail.component';
 
 
 
@@ -48,6 +49,7 @@ import { AdminUsersComponent } from './components/admin-users/admin-users.compon
     SafeHtmlPipe,
     SidenavComponent,
     AdminUsersComponent,
+    UserDetailComponent,
 
   ],
   imports: [
