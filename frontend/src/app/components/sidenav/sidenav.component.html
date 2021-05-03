@@ -120,8 +120,11 @@
           </div>
         </div>
       </div>
-      <div *ngIf="fillerContent[0] == 'User'">
+      <div *ngIf="fillerContent[0] == 'Users'">
         <app-admin-users></app-admin-users>
+      </div>
+      <div *ngIf="fillerContent[0] == 'Docs'">
+        <app-admin-documents></app-admin-documents>
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>

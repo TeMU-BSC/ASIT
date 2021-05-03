@@ -1,0 +1,47 @@
+
+<div>
+
+  <form #formDocumentFilter="ngForm" novalidate>
+    <table>
+      <tr>
+        <td>
+          Filter by
+        </td>
+      </tr>
+    </table>
+  </form>
+
+</div>
+
+
+<form #friendManagementForm="ngForm" novalidate>
+  <table class="table table-bordered ">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Source</th>
+        <th>Type</th>
+
+      </tr>
+    </thead>
+    <tbody>
+          <tr *ngFor="let document of documentsFiltered |
+          paginate: {
+              itemsPerPage: itemsPerPage,
+              currentPage: currentPage
+          }" (click)="onSelect(document)"
+          [class.selected]="document === selectedDocument">
+            <td>{{document.identifier}}</td>
+            <td>{{document.title}}</td>
+            <td>{{document.source}}</td>
+            <td>{{document.type}}</td>
+          </tr>
+        </tbody>
+  </table>
+  <pagination-controls (pageChange)="currentPage=$event"
+            maxSize="5"
+            directionLinks="true"
+            autoHide="true">
+        </pagination-controls>
+  </form>

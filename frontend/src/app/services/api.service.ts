@@ -81,4 +81,8 @@ export class ApiService {
     return this.http.get<User[]>(`${this.url}/list/user?page_size=${pageSize}&page_index=${pageIndex}`)
   }
 
+  getDocuments(): Observable<Document []>{
+    return this.http.get<Document[]>(`${this.url}/list/document`)
+  }
+
 }

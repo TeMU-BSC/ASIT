@@ -77,7 +77,7 @@ export class SidenavComponent implements OnInit {
           this.fillerContent = ["Docs"];
         break;
         case "Users":
-          this.fillerContent = ["User"];
+          this.fillerContent = ["Users"];
         break;
       default:
 

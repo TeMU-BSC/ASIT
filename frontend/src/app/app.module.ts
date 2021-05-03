@@ -29,7 +29,8 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { AdminUsersComponent } from './components/admin-users/admin-users.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
-
+import {NgxPaginationModule} from 'ngx-pagination';
+import { AdminDocumentsComponent } from './components/admin-documents/admin-documents.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { UserDetailComponent } from './components/user-detail/user-detail.compon
     SidenavComponent,
     AdminUsersComponent,
     UserDetailComponent,
+    AdminDocumentsComponent,
 
   ],
   imports: [
@@ -64,7 +66,8 @@ import { UserDetailComponent } from './components/user-detail/user-detail.compon
     HttpClientModule,
     MatSidenavModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    NgxPaginationModule,
   ],
   providers: [
     // HighlightPipe,
