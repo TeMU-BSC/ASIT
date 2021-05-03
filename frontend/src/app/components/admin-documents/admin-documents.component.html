@@ -101,10 +101,10 @@
         (click)="onSelect(document)"
         [class.selected]="document === selectedDocument"
       >
-        <td>{{ document.identifier }}</td>
-        <td>{{ document.title }}</td>
-        <td>{{ document.source }}</td>
-        <td>{{ document.type }}</td>
+        <td class="ellipsis">{{ document.identifier }}</td>
+        <td class="ellipsis" >{{ document.title  }}</td>
+        <td class="ellipsis">{{ document.source }}</td>
+        <td class="ellipsis">{{ document.type }}</td>
       </tr>
     </tbody>
   </table>

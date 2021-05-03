@@ -31,6 +31,7 @@ import { AdminUsersComponent } from './components/admin-users/admin-users.compon
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { AdminDocumentsComponent } from './components/admin-documents/admin-documents.component';
+import { AdminTermsComponent } from './components/admin-terms/admin-terms.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { AdminDocumentsComponent } from './components/admin-documents/admin-docu
     AdminUsersComponent,
     UserDetailComponent,
     AdminDocumentsComponent,
+    AdminTermsComponent,
 
   ],
   imports: [
