@@ -1,47 +1,118 @@
-
 <div>
-
-  <form #formDocumentFilter="ngForm" novalidate>
-    <table>
+  <form #formFriendFilter="ngForm" novalidate>
+    <table class="table table-striped">
       <tr>
+        <td>Filter by ID</td>
         <td>
-          Filter by
+          <input
+            type="text"
+            [(ngModel)]="idFilter"
+            name="idFilter"
+            (ngModelChange)="filter()"
+          />
         </td>
+      </tr>
+      <tr>
+        <td>Filter by abstract</td>
+        <td>
+          <input
+            type="text"
+            [(ngModel)]="abstractFilter"
+            name="abstractFilter"
+            (ngModelChange)="filter()"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Filter by Title</td>
+        <td>
+          <input
+            type="text"
+            [(ngModel)]="titleFilter"
+            name="titleFilter"
+            (ngModelChange)="filter()"
+          />
+        </td>
+      </tr>
+
+      <tr>
+        <td>Filter by Source</td>
+        <td>
+          <input
+            type="text"
+            [(ngModel)]="sourceFilter"
+            name="sourceFilter"
+            (ngModelChange)="filter()"
+          />
+        </td>
+      </tr>
+
+      <tr>
+        <td>Filter by Type</td>
+        <td>
+          <input
+            type="text"
+            [(ngModel)]="typeFilter"
+            name="typeFilter"
+            (ngModelChange)="filter()"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Current Page</td>
+        <td>
+          {{ currentPage }}
+        </td>
+      </tr>
+      <tr>
+        <td>Documents per page</td>
+        <td>
+          <input type="number" [(ngModel)]="itemsPerPage" name="itemsPerPage" />
+        </td>
+      </tr>
+      <tr>
+        <td>Documents found</td>
+        <td>{{ documentsFiltered.length }}</td>
       </tr>
     </table>
   </form>
-
 </div>
 
-
 <form #friendManagementForm="ngForm" novalidate>
-  <table class="table table-bordered ">
+  <table class="table table-bordered">
     <thead class="thead-dark">
       <tr>
         <th>ID</th>
         <th>Title</th>
         <th>Source</th>
         <th>Type</th>
-
       </tr>
     </thead>
     <tbody>
-          <tr *ngFor="let document of documentsFiltered |
-          paginate: {
-              itemsPerPage: itemsPerPage,
-              currentPage: currentPage
-          }" (click)="onSelect(document)"
-          [class.selected]="document === selectedDocument">
-            <td>{{document.identifier}}</td>
-            <td>{{document.title}}</td>
-            <td>{{document.source}}</td>
-            <td>{{document.type}}</td>
-          </tr>
-        </tbody>
+      <tr
+        *ngFor="
+          let document of documentsFiltered
+            | paginate
+              : {
+                  itemsPerPage: itemsPerPage,
+                  currentPage: currentPage
+                }
+        "
+        (click)="onSelect(document)"
+        [class.selected]="document === selectedDocument"
+      >
+        <td>{{ document.identifier }}</td>
+        <td>{{ document.title }}</td>
+        <td>{{ document.source }}</td>
+        <td>{{ document.type }}</td>
+      </tr>
+    </tbody>
   </table>
-  <pagination-controls (pageChange)="currentPage=$event"
-            maxSize="5"
-            directionLinks="true"
-            autoHide="true">
-        </pagination-controls>
-  </form>
+  <pagination-controls
+    (pageChange)="currentPage = $event"
+    maxSize="5"
+    directionLinks="true"
+    autoHide="true"
+  >
+  </pagination-controls>
+</form>
