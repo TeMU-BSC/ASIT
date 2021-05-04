@@ -3,39 +3,13 @@
   [class.example-is-mobile]="mobileQuery.matches"
   *ngIf="shouldRun"
 >
-  <mat-toolbar color="primary" class="example-toolbar">
-    <button mat-icon-button (click)="snav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <h1 class="example-app-name">Admin Panel</h1>
-    <div class="login">
-      <button *ngIf="!auth.isLoggedIn()" mat-button routerLink="login">
-        Iniciar sesión
-      </button>
-      <div *ngIf="auth.isLoggedIn()">
-        <button
-          mat-icon-button
-          matTooltip="{{ auth.getCurrentUser().fullname }}"
-          [matMenuTriggerFor]="menu"
-        >
-          <mat-icon>account_circle</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="auth.logout()">
-            <mat-icon color="warn">power_settings_new</mat-icon>
-            <span>Cerrar sesión</span>
-          </button>
-        </mat-menu>
-      </div>
-    </div>
-  </mat-toolbar>
 
   <mat-sidenav-container
     class="example-sidenav-container"
     [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
   >
     <mat-sidenav
-      #snav
+      #sidenav
       [mode]="mobileQuery.matches ? 'over' : 'side'"
       [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56"
@@ -56,6 +30,10 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
+      <button  mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
       <p *ngFor="let content of fillerContent">{{ content }}</p>
       <div *ngIf="fillerContent[0] == 'Home'">
         <div
