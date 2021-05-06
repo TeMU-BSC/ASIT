@@ -12,6 +12,7 @@ export interface Document {
   abstract: string
   source: string
   type: string
+  year?: number
   terms?: Term[]
   completed?: Boolean
   validated?: Boolean

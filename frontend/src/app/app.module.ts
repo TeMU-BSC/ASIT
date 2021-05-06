@@ -32,8 +32,8 @@ import { UserDetailComponent } from './components/user-detail/user-detail.compon
 import {NgxPaginationModule} from 'ngx-pagination';
 import { AdminDocumentsComponent } from './components/admin-documents/admin-documents.component';
 import { AdminTermsComponent } from './components/admin-terms/admin-terms.component';
-
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +70,8 @@ import { AdminTermsComponent } from './components/admin-terms/admin-terms.compon
     MatListModule,
     MatIconModule,
     NgxPaginationModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     // HighlightPipe,

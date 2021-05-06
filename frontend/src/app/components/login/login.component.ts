@@ -10,9 +10,17 @@ export class LoginComponent {
 
   email: string
   password: string
-
+  userfound: boolean;
   constructor(
     public auth: AuthService,
   ) { }
+
+  public verifyUser(email, password){
+
+    this.userfound = this.auth.login(email, password);
+    console.log(this.userfound);
+  }
+
+
 
 }
