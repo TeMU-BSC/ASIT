@@ -16,6 +16,7 @@ export class AdminUsersComponent implements OnInit {
   selectedUser: User
   loading: boolean
   paginatorLength: number
+  addNewUser: boolean = false;
 
 
   constructor(
@@ -58,6 +59,11 @@ export class AdminUsersComponent implements OnInit {
 
   selectUser(row: User) {
     this.selectedUser = row
+  }
+
+  public toggle(){
+    this.addNewUser = true;
+    console.log(this.addNewUser);
   }
 
 }

@@ -38,7 +38,9 @@ export class DocComponent implements AfterViewInit {
     public dialog: MatDialog,
   ) { }
 
-  ngAfterViewInit() { }
+  ngAfterViewInit() {
+
+   }
 
     printDoc(){
       console.log(this.doc);

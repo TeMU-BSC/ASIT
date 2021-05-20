@@ -1,26 +1,86 @@
-<div fxLayout="column" style="padding-top: 1rem;">
-  <smc-simplemattable
-    [data]="docs"
-    [columns]="columns"
-    [loading]="loading"
-    [sorting]="true"
-    [paginator]="true"
-    [paginatorPageSize]="10"
-    [paginatorPageSizeOptions]="[10, 15, 20, 25, 50, 100]"
-    [paginatorLength]="paginatorLength"
-    [backendPagination]="true"
-    (page)="refresh($event)"
-    [rowClickable]="true"
-    (rowClick)="selectDoc($event)"
-  >
-  </smc-simplemattable>
+<div fxLayout="column" style="padding-top: 1rem">
+  <div class="spinner-container" *ngIf="loading">
+    <mat-spinner class="center"></mat-spinner>
+  </div>
+
+  <div class="spinner-container" *ngIf="loading === false">
+    <div style="position:static; right:2rem">
+      <button mat-mini-fab color="primary" aria-label="Download button" onclick="console.log(event)"><mat-icon>download</mat-icon></button>
+      <button mat-mini-fab color="primary" aria-label="Upload button" ><mat-icon>upload</mat-icon></button>
+    </div>
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Ex. COVID-19"
+        #input
+      />
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- Identifier Column -->
+        <ng-container matColumnDef="identifier">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+          <td mat-cell *matCellDef="let row">{{ row.identifier }}</td>
+        </ng-container>
+
+        <!-- title Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>title</th>
+          <td mat-cell *matCellDef="let row">{{ row.title }}</td>
+        </ng-container>
+
+        <!-- Type Column -->
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+          <td mat-cell *matCellDef="let row">{{ row.type }}</td>
+        </ng-container>
+
+        <!-- Source Column -->
+        <ng-container matColumnDef="source">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Source</th>
+          <td mat-cell *matCellDef="let row">{{ row.source }}</td>
+        </ng-container>
+
+        <!-- Complete Column -->
+        <ng-container matColumnDef="completed">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Completed</th>
+          <td mat-cell *matCellDef="let row">
+            <div *ngIf="row.completed; else elseBlock">
+              <mat-icon>done</mat-icon>
+            </div>
+
+            <ng-template #elseBlock><mat-icon>close</mat-icon></ng-template>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          (click)="onSelect(row)"
+        ></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">
+            No data matching the filter "{{ input.value }}"
+          </td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+  </div>
   <app-doc
     *ngIf="selectedDoc"
     [doc]="selectedDoc"
     (completed)="refresh()"
     (validated)="refresh()"
     fxFlexAlign="center"
-    style="padding: 2rem 0;"
-    >
+    style="padding: 2rem 0"
+  >
   </app-doc>
 </div>

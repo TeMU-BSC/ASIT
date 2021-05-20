@@ -53,10 +53,13 @@ export class TermsComponent implements OnChanges {
     }
 
     // If initial view (not validation phase), early exit.
-    if (!this.validation) { return }
+    if (!this.validation) {
+
+      return }
 
     // If doc is validated, get the finished validated annotations, early exit.
     if (this.doc.validated) {
+
       this.api.getValidatedDecsCodes(validatedAnnotations).subscribe(response =>
         this.doc.terms = this.options.filter(term => response.validatedTermCodes.includes(term.code))
       )

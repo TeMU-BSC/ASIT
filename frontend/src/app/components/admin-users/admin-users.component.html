@@ -25,3 +25,31 @@
     </app-user-detail>
 
 </div>
+<div id="adduser">
+  <section>
+    <button mat-raised-button color="primary" (click)="toggle()"> Add new user  <mat-icon>face</mat-icon></button>
+  </section>
+</div>
+<div *ngIf="addNewUser" class="addNewUserForm">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Type of User</mat-label>
+    <mat-select>
+      <mat-option value="admin">Admin</mat-option>
+      <mat-option value="annotator">Annotator</mat-option>
+      <mat-option value="evaluator">Evaluator</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Assign Docs</mat-label>
+    <textarea matInput placeholder="
+    docid0
+    docid1
+    docid2" class="text-box"></textarea>
+  </mat-form-field>
+
+</div>

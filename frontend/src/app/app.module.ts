@@ -34,6 +34,8 @@ import { AdminDocumentsComponent } from './components/admin-documents/admin-docu
 import { AdminTermsComponent } from './components/admin-terms/admin-terms.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
+import {MatTableModule} from '@angular/material/table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,6 +74,8 @@ import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     NgxPaginationModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    MatTableModule,
+    MatSortModule,
   ],
   providers: [
     // HighlightPipe,

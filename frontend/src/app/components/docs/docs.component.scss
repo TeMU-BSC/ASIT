@@ -1,0 +1,27 @@
+.ellipsis {
+  max-width: 40rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+.center {
+  width: 50rem;
+  height: 80rem;
+  margin: auto;
+  margin-top: 5rem;
+  padding: 10px;
+}
