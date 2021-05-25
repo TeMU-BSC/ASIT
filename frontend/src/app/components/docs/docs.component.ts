@@ -81,4 +81,10 @@ export class DocsComponent implements AfterViewInit {
     this.selectedDoc = row
   }
 
+  downloadData(){
+
+    console.log(this.auth.getCurrentUser().email);
+
+  }
+
 }

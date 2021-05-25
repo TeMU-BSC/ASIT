@@ -5,7 +5,7 @@
 
   <div class="spinner-container" *ngIf="loading === false">
     <div style="position:static; right:2rem">
-      <button mat-mini-fab color="primary" aria-label="Download button" onclick="console.log(event)"><mat-icon>download</mat-icon></button>
+      <button mat-mini-fab color="primary" aria-label="Download button" (click)="downloadData()"><mat-icon>download</mat-icon></button>
       <button mat-mini-fab color="primary" aria-label="Upload button" ><mat-icon>upload</mat-icon></button>
     </div>
     <mat-form-field>

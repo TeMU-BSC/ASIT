@@ -13,8 +13,10 @@ import { User } from 'src/app/models/interfaces'
 })
 export class UserDetailComponent implements AfterViewInit {
 
-  @Input() user: User
+  @Input() user: User;
 
+
+   docIdentifiers = [];
 
   constructor() { }
 
@@ -22,7 +24,10 @@ export class UserDetailComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.printDoc();
+   }
+
+   ngOnChange(){
+
    }
 
   printDoc(){
