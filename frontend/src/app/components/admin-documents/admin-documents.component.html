@@ -7,12 +7,11 @@
 <div class="spinner-container" *ngIf="loading === false">
 <mat-form-field>
   <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. COVID-19" #input>
 </mat-form-field>
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
-
     <!-- ID Column -->
     <ng-container matColumnDef="identifier">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
@@ -48,8 +47,6 @@
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>
-
-
 </div>
 
 

@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator'
 import { TableColumn, Width } from 'simplemattable'
 import { ApiService } from 'src/app/services/api.service'
 import { AuthService } from 'src/app/services/auth.service'
 import { User } from 'src/app/models/interfaces'
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+
+
 
 @Component({
   selector: 'app-admin-users',
   templateUrl: './admin-users.component.html',
   styleUrls: ['./admin-users.component.scss']
 })
-export class AdminUsersComponent implements OnInit {
+export class AdminUsersComponent implements AfterViewInit {
   columns = []
   users: User[] = []
   selectedUser: User
@@ -18,27 +23,37 @@ export class AdminUsersComponent implements OnInit {
   paginatorLength: number
   addNewUser: boolean = false;
 
+  displayedColumns: string[] = ['name', 'email', 'role'];
+  dataSource: MatTableDataSource<User>;
+
+
+  private paginator: MatPaginator;
+  private sort: MatSort;
+
+  @ViewChild(MatPaginator)set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
 
   constructor(
     private api: ApiService,
     public auth: AuthService
   ) {
 
-    this.columns = [
-      new TableColumn<User, 'email'>('Email', 'email')
-        .withColFilter().withColFilterLabel('Filtrar'),
-      new TableColumn<User, 'fullname'>('Name', 'fullname')
-        .isHiddenXs(true)
-        .withWidth(Width.pct(75))
-        .withColFilter().withColFilterLabel('Filtrar'),
-      new TableColumn<User, 'role'>('Role', 'role')
-        .isHiddenXs(true)
-        .withWidth(Width.pct(75))
-        .withColFilter().withColFilterLabel('Filtrar'),
-    ]
+    this.dataSource = new MatTableDataSource([]);
+    this.refresh();
   }
 
-  ngOnInit(): void {
+  setDataSourceAttributes() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  ngAfterViewInit(): void {
     this.refresh()
   }
 
@@ -49,8 +64,12 @@ export class AdminUsersComponent implements OnInit {
       pageIndex: event?.pageIndex,
     }).subscribe(
       response => {
-       this.users = response['items']
-       this.paginatorLength = response['total_items_count']
+        this.dataSource = new MatTableDataSource(response['items']);
+        console.log(response['items']);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+
+
       },
       error => console.error(error),
       () => this.loading = false
@@ -62,8 +81,17 @@ export class AdminUsersComponent implements OnInit {
   }
 
   public toggle(){
+    this.selectedUser = null;
     this.addNewUser = true;
     console.log(this.addNewUser);
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
 }

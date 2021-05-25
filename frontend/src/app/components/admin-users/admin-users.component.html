@@ -1,35 +1,67 @@
 
 <div fxLayout="column" style="padding-top: 1rem;">
-  <smc-simplemattable
-    [data]="users"
-    [columns]="columns"
-    [loading]="loading"
-    [sorting]="true"
-    [paginator]="true"
-    [paginatorPageSize]="10"
-    [paginatorPageSizeOptions]="[10, 15, 20, 25, 50, 100]"
-    [paginatorLength]="paginatorLength"
-    [backendPagination]="true"
-    (page)="refresh($event)"
-    [rowClickable]="true"
-    (rowClick)="selectUser($event)"
-  >
-  </smc-simplemattable>
+  <div id="adduser">
+    <section>
+      <button mat-raised-button color="primary" (click)="toggle()"> Add new user  <mat-icon>face</mat-icon></button>
+    </section>
+  </div>
+  <div class="spinner-container" *ngIf="loading">
+    <mat-spinner class="center"></mat-spinner>
+  </div>
+
+  <div class="spinner-container" *ngIf="loading === false">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let row"> {{row.fullname}} </td>
+      </ng-container>
+
+      <!-- email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> title </th>
+        <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+      </ng-container>
+
+      <!-- Role Column -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+        <td mat-cell *matCellDef="let row"> {{row.role}} </td>
+      </ng-container>
+
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectUser(row)"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+  </div>
+
+
+
     <app-user-detail
     *ngIf="selectedUser"
     [user]="selectedUser"
     fxFlexAlign="center"
     style="padding: 2rem 0;"
     >
-
     </app-user-detail>
 
 </div>
-<div id="adduser">
-  <section>
-    <button mat-raised-button color="primary" (click)="toggle()"> Add new user  <mat-icon>face</mat-icon></button>
-  </section>
-</div>
+
 <div *ngIf="addNewUser" class="addNewUserForm">
 
   <mat-form-field appearance="fill">
