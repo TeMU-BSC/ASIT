@@ -31,7 +31,7 @@ export class UserDetailComponent implements AfterViewInit {
    }
 
   printDoc(){
-    console.log(this.user);
+
   }
 
 }

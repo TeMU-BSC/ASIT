@@ -43,7 +43,7 @@ export class DocComponent implements AfterViewInit {
    }
 
     printDoc(){
-      console.log(this.doc);
+
     }
   /**
    * Open a confirmation dialog before mark a document as completed/validated and apply changes to backend.

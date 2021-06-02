@@ -18,7 +18,7 @@ export class LoginComponent {
   public verifyUser(email, password){
 
     this.userfound = this.auth.login(email, password);
-    console.log(this.userfound);
+
   }
 
 

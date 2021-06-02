@@ -23,7 +23,7 @@ export class AdminUsersComponent implements AfterViewInit {
   paginatorLength: number
   addNewUser: boolean = false;
 
-  displayedColumns: string[] = ['name', 'email', 'role'];
+  displayedColumns: string[] = ['name', 'email', 'role','edit','delete'];
   dataSource: MatTableDataSource<User>;
 
 
@@ -65,7 +65,6 @@ export class AdminUsersComponent implements AfterViewInit {
     }).subscribe(
       response => {
         this.dataSource = new MatTableDataSource(response['items']);
-        console.log(response['items']);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
@@ -83,7 +82,6 @@ export class AdminUsersComponent implements AfterViewInit {
   public toggle(){
     this.selectedUser = null;
     this.addNewUser = true;
-    console.log(this.addNewUser);
   }
 
   applyFilter(event: Event) {
@@ -92,6 +90,11 @@ export class AdminUsersComponent implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  printRow(row: User){
+
+    console.log(row);
   }
 
 }
