@@ -1,21 +1,77 @@
-<mat-card>
-  <h1>{{ user.fullname }}'s Info</h1>
+<div>
+  <button btn (click)="onClose()"><mat-icon>close</mat-icon></button>
+</div>
 
-  <h3>Email: {{ user.email }}</h3>
-  <h3>Password: {{ user.password }}</h3>
-  <h3>Role: {{ user.role }}</h3>
+<div *ngIf="user_role === 'annotator'">
+<form [formGroup]="service.form">
+  <div style="display: 'flex'; flex-direction: 'column';">
+    <mat-form-field appearance="fill">
+      <mat-label>Full Name</mat-label>
+      <input formControlName="fullname" matInput>
+      <mat-error>This field is mandatory</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input formControlName="email" matInput>
+      <mat-error>This field is mandatory</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input formControlName="password" matInput>
+      <mat-error>This field is mandatory</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Type of User</mat-label>
+      <mat-select matInput  formControlName="role">
+        <mat-option >None</mat-option>
+        <ng-container *ngFor = "let r of roles">
+          <mat-option value="{{r.id}}">{{r.value}}</mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Assign Docs</mat-label>
+      <textarea matInput formControlName="assigned_document_identifiers" placeholder="
+      docid0
+      docid1
+      docid2" class="text-box"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
+    <button mat-raised-button color="warn" (click)="onClear()" >Clear</button>
+    </div>
+</form>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Assign Docs</mat-label>
-    <textarea
-      matInput
-      placeholder="
-  docid0
-  docid1
-  docid2"
-      class="text-box"
-    >
- {{ user.assigned_document_identifiers }}
-</textarea>
-  </mat-form-field>
-</mat-card>
+</div>
+<div *ngIf="user_role === 'admin'">
+<form [formGroup]="service.admin_form">
+  <div style="display: 'flex'; flex-direction: 'column';">
+    <mat-form-field appearance="fill">
+      <mat-label>Full Name</mat-label>
+      <input formControlName="fullname" matInput>
+      <mat-error>This field is mandatory</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input formControlName="email" matInput>
+      <mat-error>This field is mandatory</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input formControlName="password" matInput>
+      <mat-error>This field is mandatory</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Type of User</mat-label>
+      <mat-select matInput  formControlName="role">
+        <mat-option >None</mat-option>
+        <ng-container *ngFor = "let r of roles">
+          <mat-option value="{{r.id}}">{{r.value}}</mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="service.admin_form.invalid">Submit</button>
+    <button mat-raised-button color="warn" (click)="onClear()" >Clear</button>
+    </div>
+</form>
+</div>
+

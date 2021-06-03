@@ -36,6 +36,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import {UserService} from './shared/user.service';
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,10 +81,21 @@ import {MatTableModule} from '@angular/material/table';
     MatProgressSpinnerModule,
     MatTableModule,
     MatSortModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
   ],
   providers: [
     // HighlightPipe,
+    UserService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [UserDetailComponent],
+  exports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+  ]
 })
 export class AppModule { }

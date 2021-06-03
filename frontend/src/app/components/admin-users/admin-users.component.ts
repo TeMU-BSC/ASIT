@@ -7,8 +7,9 @@ import { User } from 'src/app/models/interfaces'
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-
-
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {UserDetailComponent} from "./../user-detail/user-detail.component"
+import { UserService } from './../../shared/user.service';
 
 @Component({
   selector: 'app-admin-users',
@@ -41,12 +42,16 @@ export class AdminUsersComponent implements AfterViewInit {
 
   constructor(
     private api: ApiService,
-    public auth: AuthService
+    public auth: AuthService,
+    private dialog: MatDialog,
+    public service: UserService
   ) {
 
     this.dataSource = new MatTableDataSource([]);
     this.refresh();
   }
+
+
 
   setDataSourceAttributes() {
     this.dataSource.paginator = this.paginator;
@@ -79,9 +84,15 @@ export class AdminUsersComponent implements AfterViewInit {
     this.selectedUser = row
   }
 
-  public toggle(){
+  public addUser(){
+    this.service.InitializeFormGroup();
     this.selectedUser = null;
-    this.addNewUser = true;
+    //this.addNewUser = true;
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width= "60%";
+    this.dialog.open(UserDetailComponent, dialogConfig);
   }
 
   applyFilter(event: Event) {
@@ -92,9 +103,20 @@ export class AdminUsersComponent implements AfterViewInit {
     }
   }
 
-  printRow(row: User){
-
-    console.log(row);
+  editUser(row: User){
+    this.service.populateForm(row);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width= "60%";
+    this.dialog.open(UserDetailComponent, dialogConfig);
   }
+
+  deleteUser(row: User){
+
+
+  }
+
+
 
 }
