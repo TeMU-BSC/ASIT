@@ -33,20 +33,18 @@ export class UserDetailComponent implements OnInit {
    }
 
 
-   changeUser_role(){
-    console.log("cambio")
-    if(this.service.form['value']['role']){
-      this.user_role = "annotator";
-    }else{
-      this.user_role = "admin"
-    }
 
+   print(event){
+     this.user_role = event['value'];
+   }
+   changeUser_role(){
+      this.user_role = this.service.admin_form['value']['role'];
    }
 
 
 
    onClose(){
-    this.service.form.reset();
+    this.service.admin_form.reset();
     this.dialogRef.close();
    }
    onEdit(){
@@ -54,15 +52,21 @@ export class UserDetailComponent implements OnInit {
    }
 
    onClear(){
-     this.service.form.reset();
+     this.service.admin_form.reset();
      this.service.InitializeFormGroup();
+     this.service.admin_form.reset();
    }
 
    onSubmit(){
-     if(this.service.form.valid){
-       this.service.form.reset();
+     if(this.service.admin_form.valid){
+       this.service.admin_form.reset();
        this.service.InitializeFormGroup();
      }
+   }
+
+   submitData(){
+    console.log(this.service.admin_form['value'])
+
    }
 
 

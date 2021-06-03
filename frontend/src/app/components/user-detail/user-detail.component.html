@@ -2,7 +2,7 @@
   <button btn (click)="onClose()"><mat-icon>close</mat-icon></button>
 </div>
 
-<div *ngIf="user_role === 'annotator'">
+<!-- <div *ngIf="user_role === 'annotator'">
 <form [formGroup]="service.form">
   <div style="display: 'flex'; flex-direction: 'column';">
     <mat-form-field appearance="fill">
@@ -22,8 +22,7 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Type of User</mat-label>
-      <mat-select matInput  formControlName="role">
-        <mat-option >None</mat-option>
+      <mat-select matInput  formControlName="role"  (selectionChange)="print($event)">
         <ng-container *ngFor = "let r of roles">
           <mat-option value="{{r.id}}">{{r.value}}</mat-option>
         </ng-container>
@@ -36,13 +35,13 @@
       docid1
       docid2" class="text-box"></textarea>
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid" (click)="submitData()">Submit</button>
     <button mat-raised-button color="warn" (click)="onClear()" >Clear</button>
     </div>
 </form>
 
-</div>
-<div *ngIf="user_role === 'admin'">
+</div> -->
+
 <form [formGroup]="service.admin_form">
   <div style="display: 'flex'; flex-direction: 'column';">
     <mat-form-field appearance="fill">
@@ -62,16 +61,33 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Type of User</mat-label>
-      <mat-select matInput  formControlName="role">
-        <mat-option >None</mat-option>
+      <mat-select matInput  formControlName="role"   (selectionChange)="print($event)">
         <ng-container *ngFor = "let r of roles">
           <mat-option value="{{r.id}}">{{r.value}}</mat-option>
         </ng-container>
       </mat-select>
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit" [disabled]="service.admin_form.invalid">Submit</button>
+    <div *ngIf="user_role === 'annotator'">
+      <mat-form-field appearance="fill">
+        <mat-label>Assign Docs</mat-label>
+        <textarea matInput formControlName="assigned_document_identifiers" placeholder="
+        docid0,
+        docid1,
+        docid2" class="text-box"></textarea>
+      </mat-form-field>
+    </div>
+    <div *ngIf="user_role === 'validator'" >
+      <mat-form-field appearance="fill">
+        <mat-label>Assign users</mat-label>
+        <textarea matInput formControlName="assigned_users" placeholder="
+        docid0,
+        docid1,
+        docid2" class="text-box"></textarea>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="service.admin_form.invalid" (click)="submitData()" >Submit</button>
     <button mat-raised-button color="warn" (click)="onClear()" >Clear</button>
     </div>
 </form>
-</div>
+
 

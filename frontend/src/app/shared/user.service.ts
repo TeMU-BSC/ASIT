@@ -15,6 +15,7 @@ export class UserService {
     role: new FormControl(''),
     password: new FormControl('',Validators.required),
     assigned_document_identifiers: new FormControl([]),
+    assigned_users: new FormControl([])
   })
 
   admin_form: FormGroup = new FormGroup({
@@ -22,9 +23,10 @@ export class UserService {
     email: new FormControl('',Validators.required),
     role: new FormControl(''),
     password: new FormControl('',Validators.required),
-    //assigned_document_identifiers: new FormControl([]),
+    assigned_document_identifiers: new FormControl([]),
+
    // generation_time: new FormControl("")
-    // assigned_users: new FormControl([]),
+    assigned_users: new FormControl([]),
   })
 
   InitializeFormGroup(){
@@ -34,7 +36,7 @@ export class UserService {
       role:"",
       password:"",
       assigned_document_identifiers: [],
-      // assigned_users: [],
+     assigned_users: [],
     })
 
     this.admin_form.setValue({
@@ -42,20 +44,15 @@ export class UserService {
       email:"",
       role:"",
       password:"",
-      //assigned_document_identifiers: [],
-      // assigned_users: [],
+      assigned_document_identifiers: [],
+       assigned_users: [],
     })
 
 
   }
 
   populateForm(user){
-    if(user['role'] === "admin"){
-      this.admin_form.setValue(_.omit(user,['_id','generation_time','id','assigned_document_identifiers']));
-    }else{
-      this.form.setValue(_.omit(user,['_id','generation_time']));
-    }
-
+      this.admin_form.setValue(_.omit(user,['_id','generation_time','id']));
     console.log(user['role']);
 
   }
