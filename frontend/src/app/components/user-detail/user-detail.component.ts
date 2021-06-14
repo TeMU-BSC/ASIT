@@ -63,7 +63,6 @@ export class UserDetailComponent implements OnInit {
        this.service.InitializeFormGroup();
      }
    }
-
    submitData(){
     console.log(this.service.admin_form['value'])
 

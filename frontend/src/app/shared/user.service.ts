@@ -9,14 +9,7 @@ export class UserService {
 
   constructor() { }
 
-  form: FormGroup = new FormGroup({
-    fullname: new FormControl('', Validators.required),
-    email: new FormControl('',Validators.required),
-    role: new FormControl(''),
-    password: new FormControl('',Validators.required),
-    assigned_document_identifiers: new FormControl([]),
-    assigned_users: new FormControl([])
-  })
+
 
   admin_form: FormGroup = new FormGroup({
     fullname: new FormControl('', Validators.required),
@@ -24,20 +17,11 @@ export class UserService {
     role: new FormControl(''),
     password: new FormControl('',Validators.required),
     assigned_document_identifiers: new FormControl([]),
-
-   // generation_time: new FormControl("")
     assigned_users: new FormControl([]),
   })
 
   InitializeFormGroup(){
-    this.form.setValue({
-      fullname: "",
-      email:"",
-      role:"",
-      password:"",
-      assigned_document_identifiers: [],
-     assigned_users: [],
-    })
+
 
     this.admin_form.setValue({
       fullname: "",
@@ -45,14 +29,36 @@ export class UserService {
       role:"",
       password:"",
       assigned_document_identifiers: [],
-       assigned_users: [],
+      assigned_users: [],
     })
 
 
   }
 
   populateForm(user){
-      this.admin_form.setValue(_.omit(user,['_id','generation_time','id']));
+    if(user['role'] === 'admin'){
+      const admin = {
+      fullname: user['fullname'],
+      email:user['email'],
+      role:user['role'],
+      password: user['password'],
+      assigned_document_identifiers: [],
+      assigned_users: [],
+      }
+      this.admin_form.setValue(_.omit(admin,['_id','generation_time','id']));
+    }
+    if(user['role'] === 'annotator'){
+      const annotator = {
+      fullname: user['fullname'],
+      email:user['email'],
+      role:user['role'],
+      password: user['password'],
+      assigned_document_identifiers: user['assigned_document_identifiers'] ?  user['assigned_document_identifiers'] : [],
+      assigned_users: [],
+      }
+      this.admin_form.setValue(_.omit(annotator,['_id','generation_time','id']));
+    }
+
     console.log(user['role']);
 
   }

@@ -85,4 +85,8 @@ export class ApiService {
     return this.http.get<Document[]>(`${this.url}/list/document`)
   }
 
+  removeUser(user: User): Observable<any>{
+    return this.http.request<ApiResponse>('delete', `${this.url}/user`, { body: user })
+  }
+
 }

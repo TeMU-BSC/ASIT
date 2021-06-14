@@ -114,6 +114,11 @@ export class AdminUsersComponent implements AfterViewInit {
 
   deleteUser(row: User){
 
+    this.api.removeUser(row).subscribe(
+      response => {
+        console.log(response)
+      }
+    )
 
   }
 

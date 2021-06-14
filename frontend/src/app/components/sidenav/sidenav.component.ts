@@ -83,9 +83,7 @@ export class SidenavComponent implements OnInit {
 
         break;
     }
-
   }
-
   registerUsers() {
     this.auth.registerUsers(this.dataFromFile as User[]).subscribe(
       response => this.response = response,
