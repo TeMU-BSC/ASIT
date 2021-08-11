@@ -3,7 +3,7 @@ This is the REST API for the Indexer web tool.
 
 This backend is built with Flask and connects to a given MongoDB instance.
 
-Author: alejandro.asensio@bsc.es
+Authors: alejandro.asensio@bsc.es & 
 '''
 
 # Standard library.
