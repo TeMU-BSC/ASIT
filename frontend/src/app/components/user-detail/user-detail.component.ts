@@ -19,6 +19,7 @@ export class UserDetailComponent implements OnInit {
 
   user_role= "";
   docIdentifiers = [];
+
   constructor(public service: UserService, public dialogRef: MatDialogRef<UserDetailComponent>){
   }
 
@@ -29,7 +30,9 @@ export class UserDetailComponent implements OnInit {
   ]
 
   ngOnInit() {
+
       this.changeUser_role();
+
    }
 
 
@@ -45,6 +48,8 @@ export class UserDetailComponent implements OnInit {
 
    onClose(){
     this.service.admin_form.reset();
+    this.service.resetAssignedUser();
+    this.service.InitializeFormGroup();
     this.dialogRef.close();
    }
    onEdit(){
@@ -53,6 +58,7 @@ export class UserDetailComponent implements OnInit {
 
    onClear(){
      this.service.admin_form.reset();
+     this.service.resetAssignedUser();
      this.service.InitializeFormGroup();
      this.service.admin_form.reset();
    }
@@ -65,7 +71,6 @@ export class UserDetailComponent implements OnInit {
    }
    submitData(){
     console.log(this.service.admin_form['value'])
-
    }
 
 
