@@ -15,7 +15,7 @@ export class UserService {
     email: new FormControl('',Validators.required),
     role: new FormControl(''),
     password: new FormControl('',Validators.required),
-    assigned_document_identifiers: new FormControl([]),
+    assigned_document_identifiers: new FormControl(''),
     assigned_users: this.fb.array([])
   })
 
@@ -51,7 +51,7 @@ export class UserService {
       email:user['email'],
       role:user['role'],
       password: user['password'],
-      assigned_document_identifiers: user['assigned_document_identifiers'] ?  user['assigned_document_identifiers'] : [],
+      assigned_document_identifiers: user['assigned_document_identifiers'] ?  user['assigned_document_identifiers'] : '',
       assigned_users: [],
       }
       this.admin_form.setValue(_.omit(annotator,['_id','generation_time','id']));
@@ -63,22 +63,19 @@ export class UserService {
       email:user['email'],
       role:user['role'],
       password: user['password'],
-      assigned_document_identifiers: user['assigned_document_identifiers'] ?  user['assigned_document_identifiers'] : [],
+      assigned_document_identifiers: user['assigned_document_identifiers'] ?  user['assigned_document_identifiers'] : '',
       assigned_users: []
       }
       this.admin_form.setValue(_.omit(validator,['_id','generation_time','id']));
       for (let index = 0; index < user['assigned_users'].length; index++) {
         let assigned_user =  this.fb.group({
           email : new FormControl(user['assigned_users'][index]['email']),
-          assigned_document_identifiers: new FormControl(user['assigned_users'][index]['assigned_document_identifiers'])
+          assigned_document_identifiers: new FormControl((user['assigned_users'][index]['assigned_document_identifiers'].join("\n")))
         })
         this.assigned_users.push(assigned_user);
 
       }
     }
-
-
-
   }
 
   get assigned_users(){
