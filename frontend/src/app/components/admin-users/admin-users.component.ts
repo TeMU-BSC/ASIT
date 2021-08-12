@@ -72,8 +72,6 @@ export class AdminUsersComponent implements AfterViewInit {
         this.dataSource = new MatTableDataSource(response['items']);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-
-
       },
       error => console.error(error),
       () => this.loading = false
@@ -112,10 +110,15 @@ export class AdminUsersComponent implements AfterViewInit {
     this.dialog.open(UserDetailComponent, dialogConfig);
   }
 
-  deleteUser(row: User){
+  deleteUser(row){
+
+    let index = this.dataSource.data.indexOf(row);
     this.api.removeUser(row).subscribe(
       response => {
-        console.log(response)
+        if (response['success']){
+          this.dataSource.data.splice(index, 1);
+          this.dataSource._updateChangeSubscription();
+        }
       }
     )
 
