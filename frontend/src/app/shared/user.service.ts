@@ -33,7 +33,7 @@ export class UserService {
   }
 
   populateForm(user){
-    console.log(user['role']);
+
     if(user['role'] === 'admin'){
       const admin = {
       fullname: user['fullname'],
@@ -51,13 +51,12 @@ export class UserService {
       email:user['email'],
       role:user['role'],
       password: user['password'],
-      assigned_document_identifiers: user['assigned_document_identifiers'] ?  user['assigned_document_identifiers'] : '',
+      assigned_document_identifiers: user['assigned_document_identifiers'] ?  user['assigned_document_identifiers'].join("\n") : '',
       assigned_users: [],
       }
       this.admin_form.setValue(_.omit(annotator,['_id','generation_time','id']));
     }
     if(user['role'] === 'validator'){
-      console.log(user);
       const validator = {
       fullname: user['fullname'],
       email:user['email'],
@@ -98,6 +97,6 @@ export class UserService {
   }
 
   resetAssignedUser(){
-   console.log(this.admin_form);
+
   }
 }
