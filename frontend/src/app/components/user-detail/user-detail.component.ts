@@ -20,7 +20,8 @@ export class UserDetailComponent implements OnInit {
   user_role= "";
   docIdentifiers = [];
 
-  constructor(public service: UserService, public dialogRef: MatDialogRef<UserDetailComponent>){
+  constructor(public service: UserService, public dialogRef: MatDialogRef<UserDetailComponent>,public api: ApiService,
+    public auth: AuthService){
   }
 
   roles = [
@@ -71,14 +72,15 @@ export class UserDetailComponent implements OnInit {
    }
    submitData(){
 
-    this.service.admin_form['value']['assigned_document_identifiers'] = this.service.admin_form['value']['assigned_document_identifiers'].split("\n")
+    this.service.admin_form['value']['assigned_document_identifiers'] = this.service.admin_form['value']['role'] === 'annotator' ? this.service.admin_form['value']['assigned_document_identifiers'].split("\n") : [];
     if(this.service.admin_form['value']['role'] === 'validator'){
       for (let index = 0; index < this.service.admin_form['value']['assigned_users'].length; index++) {
         this.service.admin_form['value']['assigned_users'][index]['assigned_document_identifiers'] =   this.service.admin_form['value']['assigned_users'][index]['assigned_document_identifiers'].split("\n")
       }
     }
-    console.log(this.service.admin_form['value'])
 
+
+    console.log(this.service.admin_form['value'])
    }
 
 

@@ -189,6 +189,11 @@ def delete_many(item):
     collection = f'{item}s'
     if collection == "users":
         user = request.json
+        deletion_result = mongo.db[collection].delete_one({'email': user.get('email')})
+        if deletion_result.acknowledged:
+            message = f'{item}s deleted successfully'
+        else:
+            message = 'something went wrong'
     else:
         documents = request.json
         identifiers = [document.get('identifier') for document in documents]
@@ -200,7 +205,7 @@ def delete_many(item):
             message = f'{item}s deleted successfully'
         else:
             message = 'something went wrong'
-    return jsonify(success=deletion_result.acknowledged, message=message, usuario = user)
+    return jsonify(success=deletion_result.acknowledged, message=message)
 
 
 @app.route('/mark-doc-as/<status>', methods=['POST'])
