@@ -10,6 +10,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {UserDetailComponent} from "./../user-detail/user-detail.component"
 import { UserService } from './../../shared/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 @Component({
   selector: 'app-admin-users',
@@ -44,7 +45,8 @@ export class AdminUsersComponent implements AfterViewInit {
     private api: ApiService,
     public auth: AuthService,
     private dialog: MatDialog,
-    public service: UserService
+    public service: UserService,
+    private snackBar: MatSnackBar,
   ) {
 
     this.dataSource = new MatTableDataSource([]);
@@ -110,17 +112,28 @@ export class AdminUsersComponent implements AfterViewInit {
     this.dialog.open(UserDetailComponent, dialogConfig);
   }
 
-  deleteUser(row){
+  deleteUser(row: User){
 
-    let index = this.dataSource.data.indexOf(row);
-    this.api.removeUser(row).subscribe(
-      response => {
-        if (response['success']){
-          this.dataSource.data.splice(index, 1);
-          this.dataSource._updateChangeSubscription();
+      let index = this.dataSource.data.indexOf(row);
+      this.dataSource.data.splice(index, 1);
+      this.dataSource._updateChangeSubscription();
+
+      // Emulate term removal.
+      const snackBarRef = this.snackBar.open('User deleted.', 'Undo')
+
+      // If the action button of snackbar is clicked, the term is not removed.
+      snackBarRef.onAction().subscribe(() => {
+        this.dataSource.data.splice(index, 0, row);
+        this.dataSource._updateChangeSubscription();
+        this.snackBar.open('User was not deleted.', 'OK', { duration: 5000 })
+      })
+
+      // Otherwise, if the the the snackbar is closed by timeout, the term is sent to the backend to be deleted.
+      snackBarRef.afterDismissed().subscribe(info => {
+        if (!info.dismissedByAction) {
+          this.api.removeUser(row).subscribe()
         }
-      }
-    )
+      })
 
   }
 
