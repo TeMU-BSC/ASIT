@@ -72,15 +72,49 @@ export class UserDetailComponent implements OnInit {
    }
    submitData(){
 
+    let id =  this.service.admin_form['value']['_id']
+
     this.service.admin_form['value']['assigned_document_identifiers'] = this.service.admin_form['value']['role'] === 'annotator' ? this.service.admin_form['value']['assigned_document_identifiers'].split("\n") : [];
     if(this.service.admin_form['value']['role'] === 'validator'){
       for (let index = 0; index < this.service.admin_form['value']['assigned_users'].length; index++) {
         this.service.admin_form['value']['assigned_users'][index]['assigned_document_identifiers'] =   this.service.admin_form['value']['assigned_users'][index]['assigned_document_identifiers'].split("\n")
       }
     }
+    let updatedUser: User;
+    if(this.service.admin_form['value']['role'] === 'validator'){
+     updatedUser  ={
+
+      fullname: this.service.admin_form['value']['fullname'],
+      email: this.service.admin_form['value']['email'],
+      role: this.service.admin_form['value']['role'],
+      password: this.service.admin_form['value']['password'],
+      assigned_document_identifiers: this.service.admin_form['value']['assigned_document_identifiers'],
+      assigned_users: this.service.admin_form['value']['assigned_users']
+      }
+    }else if(this.service.admin_form['value']['role'] === 'annotator'){
+      updatedUser   ={
+
+        fullname: this.service.admin_form['value']['fullname'],
+        email: this.service.admin_form['value']['email'],
+        role: this.service.admin_form['value']['role'],
+        password: this.service.admin_form['value']['password'],
+        assigned_document_identifiers: this.service.admin_form['value']['assigned_document_identifiers'],
+        }
+    }else{
+      updatedUser  ={
+
+        fullname: this.service.admin_form['value']['fullname'],
+        email: this.service.admin_form['value']['email'],
+        role: this.service.admin_form['value']['role'],
+        password: this.service.admin_form['value']['password'],
+        }
+    }
+
+    this.api.updateUser(updatedUser,id).subscribe(response =>{
+      console.log(response)
+    })
 
 
-    console.log(this.service.admin_form['value'])
    }
 
 

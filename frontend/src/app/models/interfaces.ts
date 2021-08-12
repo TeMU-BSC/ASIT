@@ -1,9 +1,11 @@
 export interface User {
+  _id?: string
   fullname: string
   email: string
-  role: 'annotator' | 'admin'
+  role: 'annotator' | 'admin' | 'validator'
   password: string
-  assigned_document_identifiers?: string[]
+  assigned_document_identifiers?: string[],
+  assigned_users?: string[]
 }
 
 export interface Document {
