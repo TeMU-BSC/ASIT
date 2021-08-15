@@ -1,62 +1,66 @@
-<div>
-  <button mat-raised-button color="warn" (click)="onClose()" style="padding: '1rem'"><mat-icon>close</mat-icon></button>
-</div>
-
-
-<form [formGroup]="service.admin_form">
-  <div style="display: 'flex'; flex-direction: 'column';">
-    <mat-form-field appearance="fill">
-      <mat-label>Full Name</mat-label>
-      <input formControlName="fullname" matInput>
-      <mat-error>This field is mandatory</mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Email</mat-label>
-      <input formControlName="email" matInput>
-      <mat-error>This field is mandatory</mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Password</mat-label>
-      <input formControlName="password" matInput>
-      <mat-error>This field is mandatory</mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Type of User</mat-label>
-      <mat-select matInput  formControlName="role"   (selectionChange)="print($event)">
-        <ng-container *ngFor = "let r of roles">
-          <mat-option value="{{r.id}}">{{r.value}}</mat-option>
-        </ng-container>
-      </mat-select>
-    </mat-form-field>
-    <div *ngIf="user_role === 'annotator'">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-10" style="font-size: 2rem; margin-top:1rem">Create/Edit User</div>
+  <div class="col-sm-2" style="float:right; margin-bottom:1rem"> <button mat-raised-button color="warn" (click)="onClose()" style="padding: '1rem'"><mat-icon>close</mat-icon></button></div>
+  </div>
+  <form [formGroup]="service.admin_form">
+    <div style="display: 'flex'; flex-direction: 'column';">
       <mat-form-field appearance="fill">
-        <mat-label>Assign Docs</mat-label>
-        <textarea matInput formControlName="assigned_document_identifiers" placeholder="
-        docid0
-        docid1
-        docid2" class="text-box"></textarea>
+        <mat-label>Full Name</mat-label>
+        <input formControlName="fullname" matInput>
+        <mat-error>This field is mandatory</mat-error>
       </mat-form-field>
-    </div>
-    <div *ngIf="user_role === 'validator'" formArrayName = "assigned_users">
-        <div *ngFor = "let assigned_user of this.service.assigned_users.controls; let i = index" [formGroupName]="i">
-          <mat-form-field>
-            <input matInput placeholder="user@email" formControlName="email">
-          </mat-form-field>
-          <mat-form-field>
-            <textarea matInput formControlName="assigned_document_identifiers" placeholder="
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input formControlName="email" matInput>
+        <mat-error>This field is mandatory</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input formControlName="password" matInput>
+        <mat-error>This field is mandatory</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Type of User</mat-label>
+        <mat-select matInput  formControlName="role"   (selectionChange)="print($event)">
+          <ng-container *ngFor = "let r of roles">
+            <mat-option value="{{r.id}}">{{r.value}}</mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="user_role === 'annotator'">
+        <mat-form-field appearance="fill">
+          <mat-label>Assign Docs</mat-label>
+          <textarea matInput formControlName="assigned_document_identifiers" placeholder="
           docid0
           docid1
           docid2" class="text-box"></textarea>
-          </mat-form-field>
-          <button mat-raised-button color="warn" (click)= "this.service.deleteAssignedUser(i)">Delete</button>
-        </div>
-        <button mat-raised-button color = "primary" (click)="this.service.addAssignedUser()">
-          Add user
-        </button>
-    </div>
-    <button mat-raised-button color="primary" type="submit" [disabled]="service.admin_form.invalid" (click)="submitData()" ><mat-icon>save</mat-icon> SAVE</button>
-    <!-- <button mat-raised-button color="warn" (click)="onClear()" >Clear</button> -->
-    </div>
-</form>
+        </mat-form-field>
+      </div>
+      <div *ngIf="user_role === 'validator'" formArrayName = "assigned_users">
+          <div *ngFor = "let assigned_user of this.service.assigned_users.controls; let i = index" [formGroupName]="i">
+            <mat-form-field>
+              <input matInput placeholder="user@email" formControlName="email">
+            </mat-form-field>
+            <mat-form-field>
+              <textarea matInput formControlName="assigned_document_identifiers" placeholder="
+            docid0
+            docid1
+            docid2" class="text-box"></textarea>
+            </mat-form-field>
+            <button mat-raised-button color="warn" (click)= "this.service.deleteAssignedUser(i)">Delete</button>
+          </div>
+          <button mat-raised-button color = "primary" (click)="this.service.addAssignedUser()">
+            Add user
+          </button>
+      </div>
+      <button mat-raised-button color="primary" type="submit" [disabled]="service.admin_form.invalid" (click)="submitData()" ><mat-icon>save</mat-icon> SAVE</button>
+      <!-- <button mat-raised-button color="warn" (click)="onClear()" >Clear</button> -->
+      </div>
+  </form>
+
+</div>
+
+
 
 
