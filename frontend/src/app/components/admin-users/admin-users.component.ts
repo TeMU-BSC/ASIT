@@ -4,11 +4,11 @@ import { TableColumn, Width } from 'simplemattable'
 import { ApiService } from 'src/app/services/api.service'
 import { AuthService } from 'src/app/services/auth.service'
 import { User } from 'src/app/models/interfaces'
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {UserDetailComponent} from "./../user-detail/user-detail.component"
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { UserDetailComponent } from "./../user-detail/user-detail.component"
 import { UserService } from './../../shared/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar'
 
@@ -25,14 +25,14 @@ export class AdminUsersComponent implements AfterViewInit {
   paginatorLength: number
   addNewUser: boolean = false;
 
-  displayedColumns: string[] = ['name', 'email', 'role','edit','delete'];
+  displayedColumns: string[] = ['name', 'email', 'role', 'edit', 'delete'];
   dataSource: MatTableDataSource<User>;
 
 
   private paginator: MatPaginator;
   private sort: MatSort;
 
-  @ViewChild(MatPaginator)set matPaginator(mp: MatPaginator) {
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
     this.setDataSourceAttributes();
   }
@@ -84,14 +84,14 @@ export class AdminUsersComponent implements AfterViewInit {
     this.selectedUser = row
   }
 
-  public addUser(){
+  public addUser() {
     this.service.InitializeFormGroup();
     this.selectedUser = null;
     //this.addNewUser = true;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width= "60%";
+    dialogConfig.width = "60%";
     this.dialog.open(UserDetailComponent, dialogConfig);
   }
 
@@ -103,37 +103,57 @@ export class AdminUsersComponent implements AfterViewInit {
     }
   }
 
-  editUser(row: User){
+  editUser(row: User) {
     this.service.populateForm(row);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width= "60%";
-    this.dialog.open(UserDetailComponent, dialogConfig);
+    dialogConfig.width = "60%";
+    const dialogRef = this.dialog.open(UserDetailComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      data => {
+
+        console.log(data)
+        let index = this.indexOfFunc(this.dataSource.data, "_id", data['_id'])
+        this.dataSource.data.splice(index, 1, data);
+        this.dataSource._updateChangeSubscription();
+        console.log(index);
+      }
+    );
   }
 
-  deleteUser(row: User){
 
-      let index = this.dataSource.data.indexOf(row);
-      this.dataSource.data.splice(index, 1);
+  indexOfFunc(array, attr, value) {
+    for (var i = 0; i < array.length; i += 1) {
+      if (array[i][attr] === value) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  deleteUser(row: User) {
+
+    let index = this.dataSource.data.indexOf(row);
+    this.dataSource.data.splice(index, 1);
+    this.dataSource._updateChangeSubscription();
+
+    // Emulate term removal.
+    const snackBarRef = this.snackBar.open('User deleted.', 'Undo')
+
+    // If the action button of snackbar is clicked, the term is not removed.
+    snackBarRef.onAction().subscribe(() => {
+      this.dataSource.data.splice(index, 0, row);
       this.dataSource._updateChangeSubscription();
+      this.snackBar.open('User was not deleted.', 'OK', { duration: 5000 })
+    })
 
-      // Emulate term removal.
-      const snackBarRef = this.snackBar.open('User deleted.', 'Undo')
-
-      // If the action button of snackbar is clicked, the term is not removed.
-      snackBarRef.onAction().subscribe(() => {
-        this.dataSource.data.splice(index, 0, row);
-        this.dataSource._updateChangeSubscription();
-        this.snackBar.open('User was not deleted.', 'OK', { duration: 5000 })
-      })
-
-      // Otherwise, if the the the snackbar is closed by timeout, the term is sent to the backend to be deleted.
-      snackBarRef.afterDismissed().subscribe(info => {
-        if (!info.dismissedByAction) {
-          this.api.removeUser(row).subscribe()
-        }
-      })
+    // Otherwise, if the the the snackbar is closed by timeout, the term is sent to the backend to be deleted.
+    snackBarRef.afterDismissed().subscribe(info => {
+      if (!info.dismissedByAction) {
+        this.api.removeUser(row).subscribe()
+      }
+    })
 
   }
 

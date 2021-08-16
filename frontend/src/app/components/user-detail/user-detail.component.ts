@@ -47,11 +47,12 @@ export class UserDetailComponent implements OnInit {
 
 
 
-  onClose() {
-    this.service.admin_form.reset();
+  onClose(data = null) {
+    this.dialogRef.close(data);
     this.service.resetAssignedUser();
     this.service.InitializeFormGroup();
-    this.dialogRef.close();
+
+    this.service.admin_form.reset();
   }
   onEdit() {
 
@@ -73,8 +74,7 @@ export class UserDetailComponent implements OnInit {
   submitData() {
 
     let id = this.service.admin_form['value']['_id']
-
-    this.service.admin_form['value']['assigned_document_identifiers'] = this.service.admin_form['value']['role'] === 'annotator' ? this.service.admin_form['value']['assigned_document_identifiers'].split("\n") : [];
+    this.service.admin_form['value']['assigned_document_identifiers'] = typeof this.service.admin_form['value']['assigned_document_identifiers'] !== "object" ? this.service.admin_form['value']['assigned_document_identifiers'].split("\n") : [];
     if (this.service.admin_form['value']['role'] === 'validator') {
       for (let index = 0; index < this.service.admin_form['value']['assigned_users'].length; index++) {
         this.service.admin_form['value']['assigned_users'][index]['assigned_document_identifiers'] = this.service.admin_form['value']['assigned_users'][index]['assigned_document_identifiers'].split("\n")
@@ -83,7 +83,6 @@ export class UserDetailComponent implements OnInit {
     let updatedUser: User;
     if (this.service.admin_form['value']['role'] === 'validator') {
       updatedUser = {
-
         fullname: this.service.admin_form['value']['fullname'],
         email: this.service.admin_form['value']['email'],
         role: this.service.admin_form['value']['role'],
@@ -110,11 +109,14 @@ export class UserDetailComponent implements OnInit {
       }
     }
 
-    this.api.updateUser(updatedUser, id).subscribe(response => {
-      console.log(response)
-    })
+    if (id) {
+      this.api.updateUser(updatedUser, id).subscribe(response => {
+        console.log(response)
+      })
+    }
 
-    this.onClose();
+
+    this.onClose(this.service.admin_form['value']);
 
   }
 
