@@ -47,20 +47,21 @@ export class UserDetailComponent implements OnInit {
 
 
 
-  onClose(data = null) {
-    this.dialogRef.close(data);
+  onClose(data) {
+
     this.service.resetAssignedUser();
     this.service.InitializeFormGroup();
-
     this.service.admin_form.reset();
+    this.dialogRef.close(data);
   }
   onEdit() {
 
   }
 
   onClear() {
-    this.service.admin_form.reset();
     this.service.resetAssignedUser();
+    this.service.admin_form.reset();
+
     this.service.InitializeFormGroup();
     this.service.admin_form.reset();
   }

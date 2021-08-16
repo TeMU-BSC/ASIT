@@ -112,12 +112,11 @@ export class AdminUsersComponent implements AfterViewInit {
     const dialogRef = this.dialog.open(UserDetailComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       data => {
-
-        console.log(data)
-        let index = this.indexOfFunc(this.dataSource.data, "_id", data['_id'])
-        this.dataSource.data.splice(index, 1, data);
-        this.dataSource._updateChangeSubscription();
-        console.log(index);
+        if (data['_id']) {
+          let index = this.indexOfFunc(this.dataSource.data, "_id", data['_id'])
+          this.dataSource.data.splice(index, 1, data);
+          this.dataSource._updateChangeSubscription();
+        }
       }
     );
   }

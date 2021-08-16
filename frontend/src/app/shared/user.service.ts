@@ -103,5 +103,9 @@ export class UserService {
 
   resetAssignedUser() {
 
+    const control = <FormArray>this.admin_form.controls['assigned_users'];
+    for (let i = control.length - 1; i >= 0; i--) {
+      control.removeAt(i)
+    }
   }
 }
