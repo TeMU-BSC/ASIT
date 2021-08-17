@@ -116,6 +116,8 @@ export class UserDetailComponent implements OnInit {
       })
     }
 
+    console.log(this.service.admin_form['value']);
+
 
     this.onClose(this.service.admin_form['value']);
 

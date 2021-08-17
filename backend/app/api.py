@@ -54,7 +54,8 @@ def generate_mock():
     mock_documents = generate_mock_items('document', document_count)
     mock_terms = generate_mock_items('term', term_count)
     for user in mock_users:
-        identifiers = [document.get('identifier') for document in mock_documents]
+        identifiers = [document.get('identifier')
+                       for document in mock_documents]
         user['assigned_document_identifiers'] = identifiers
     print(json.dumps(mock_users, indent=2))
     print(json.dumps(mock_documents, indent=2))
@@ -71,7 +72,8 @@ def login():
     collection = 'users'
     email = request.json.get('email')
     password = request.json.get('password')
-    user = mongo.db[collection].find_one({'email': email, 'password': password}, {'_id': 0})
+    user = mongo.db[collection].find_one(
+        {'email': email, 'password': password}, {'_id': 0})
     return jsonify(user)
 
 
@@ -93,7 +95,8 @@ def get_assigned_documents_to_user(email):
         skip = int(request.args.get('page_index')) * limit
     except:
         skip = 0
-    found_documents = mongo.db.documents.find({'identifier': {'$in': identifiers}}, {'_id': 0})
+    found_documents = mongo.db.documents.find(
+        {'identifier': {'$in': identifiers}}, {'_id': 0})
     documents = list(found_documents.skip(skip).limit(limit))
     user_completions = mongo.db.completions.find_one({'user_email': email})
     completed_document_ids = list()
@@ -101,15 +104,18 @@ def get_assigned_documents_to_user(email):
         completed_document_ids = user_completions.get('document_identifiers')
     total_document_count = found_documents.count()
     for document in documents:
-        term_codes = mongo.db.annotations.distinct('term_code', {'document_identifier': document.get('identifier'), 'user_email': email})
+        term_codes = mongo.db.annotations.distinct(
+            'term_code', {'document_identifier': document.get('identifier'), 'user_email': email})
         terms = mongo.db.terms.find({'code': {'$in': term_codes}})
         terms_with_str_ids = list()
         for term in terms:
             term['_id'] = str(term['_id'])
             terms_with_str_ids.append(term)
         document['terms'] = terms_with_str_ids
-        document['completed'] = document.get('identifier') in completed_document_ids
+        document['completed'] = document.get(
+            'identifier') in completed_document_ids
     return jsonify(documents=documents, total_document_count=total_document_count)
+
 
 @app.route('/list/<item>', methods=['GET'])
 def get_item_list(item):
@@ -117,7 +123,7 @@ def get_item_list(item):
     success = False
     query_filter = request.json
     try:
-        limit = int(request.args.get('page_size')) 
+        limit = int(request.args.get('page_size'))
     except:
         limit = 0
     try:
@@ -127,8 +133,8 @@ def get_item_list(item):
     found_documents = mongo.db[collection].find(query_filter)
     documents = list(found_documents.skip(skip).limit(limit))
     for document in documents:
-            document['generation_time'] = iso_format(document['_id'])
-            document['_id'] = str(document['_id'])
+        document['generation_time'] = iso_format(document['_id'])
+        document['_id'] = str(document['_id'])
     response = documents
     total_document_count = found_documents.count()
     return jsonify(items=documents, total_items_count=total_document_count)
@@ -160,11 +166,14 @@ def read(item):
     collection = f'{item}s'
     query_filter = request.json
     is_multiple = request.args.get('multiple') == 'true'
+
     if is_multiple:
-        limit = int(request.args.get('limit')) if request.args.get('limit') else 0
+
+        limit = int(request.args.get('limit')
+                    ) if request.args.get('limit') else 0
         documents = list(mongo.db[collection].find(query_filter, limit=limit))
         for document in documents:
-            document['generation_time'] = iso_format(document['_id'])
+            # document['generation_time'] = iso_format(document['_id'])
             document['_id'] = str(document['_id'])
         response = documents
     else:
@@ -180,7 +189,8 @@ def read(item):
 def update_one(item, _id):
     collection = f'{item}s'
     update_for_item = request.json
-    updating_result = mongo.db[collection].update_one({'_id': ObjectId(_id)}, {'$set': update_for_item})
+    updating_result = mongo.db[collection].update_one(
+        {'_id': ObjectId(_id)}, {'$set': update_for_item})
     return jsonify(success=updating_result.acknowledged)
 
 
@@ -189,7 +199,8 @@ def delete_many(item):
     collection = f'{item}s'
     if collection == "users":
         user = request.json
-        deletion_result = mongo.db[collection].delete_one({'email': user.get('email')})
+        deletion_result = mongo.db[collection].delete_one(
+            {'email': user.get('email')})
         if deletion_result.acknowledged:
             message = f'{item}s deleted successfully'
         else:
@@ -199,7 +210,8 @@ def delete_many(item):
         identifiers = [document.get('identifier') for document in documents]
         success = False
         if isinstance(request.json, list):
-            deletion_result = mongo.db[collection].delete_many({'identifier': {'$in': identifiers}})
+            deletion_result = mongo.db[collection].delete_many(
+                {'identifier': {'$in': identifiers}})
             success = deletion_result.acknowledged
         if success:
             message = f'{item}s deleted successfully'
@@ -216,23 +228,27 @@ def mark_doc_as(status):
     if status == 'completed':
         result = mongo.db.completions.update_one(
             {'user_email': doc_to_mark['user_email']},
-            {'$push': {'document_identifiers': request.json['document_identifier']}},
+            {'$push': {
+                'document_identifiers': request.json['document_identifier']}},
             upsert=True
         )
     if status == 'uncompleted':
         result = mongo.db.completions.update_one(
             {'user_email': doc_to_mark['user_email']},
-            {'$pull': {'document_identifiers': doc_to_mark['document_identifier']}}
+            {'$pull': {
+                'document_identifiers': doc_to_mark['document_identifier']}}
         )
     if status == 'validated':
         result = mongo.db.validations.update_one(
             {'user_email': doc_to_mark['user_email']},
-            {'$push': {'document_identifiers': request.json['document_identifier']}},
+            {'$push': {
+                'document_identifiers': request.json['document_identifier']}},
             upsert=True
         )
     if status == 'unvalidated':
         result = mongo.db.validations.update_one(
             {'user_email': doc_to_mark['user_email']},
-            {'$pull': {'document_identifiers': doc_to_mark['document_identifier']}}
+            {'$pull': {
+                'document_identifiers': doc_to_mark['document_identifier']}}
         )
     return jsonify({'success': result.acknowledged})
