@@ -146,10 +146,13 @@ def get_item_list(item):
 def create(item):
     collection = f'{item}s'
     success = False
+    record = ""
     if isinstance(request.json, dict):
         document = request.json
         insertion_result = mongo.db[collection].insert_one(document)
         success = insertion_result.acknowledged
+        record = mongo.db[collection].find_one(document)
+        record['_id'] = str(record['_id'])
     elif isinstance(request.json, list):
         documents = request.json
         insert_many_result = mongo.db[collection].insert_many(documents)
@@ -158,7 +161,8 @@ def create(item):
         message = f'{item}s inserted successfully'
     else:
         message = 'something went wrong'
-    return jsonify(success=success, message=message)
+
+    return jsonify(success=success, message=message, record=record)
 
 
 @app.route('/<item>', methods=['GET'])
@@ -168,7 +172,6 @@ def read(item):
     is_multiple = request.args.get('multiple') == 'true'
 
     if is_multiple:
-
         limit = int(request.args.get('limit')
                     ) if request.args.get('limit') else 0
         documents = list(mongo.db[collection].find(query_filter, limit=limit))

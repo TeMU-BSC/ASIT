@@ -93,7 +93,16 @@ export class AdminUsersComponent implements AfterViewInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    this.dialog.open(UserDetailComponent, dialogConfig);
+    const dialogRef = this.dialog.open(UserDetailComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data['_id']) {
+          let index = this.indexOfFunc(this.dataSource.data, "_id", data['_id'])
+          this.dataSource.data.push(data)
+          this.dataSource._updateChangeSubscription();
+        }
+      }
+    );
   }
 
   applyFilter(event: Event) {
@@ -118,6 +127,7 @@ export class AdminUsersComponent implements AfterViewInit {
           this.dataSource.data.splice(index, 1, data);
           this.dataSource._updateChangeSubscription();
         }
+
       }
     );
   }

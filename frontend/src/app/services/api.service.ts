@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { environment } from 'src/environments/environment'
 import { _sortByOrder } from 'src/app/helpers/functions'
-import { ApiResponse, Document, Annotation, Term, User} from 'src/app/models/interfaces'
+import { ApiResponse, Document, Annotation, Term, User } from 'src/app/models/interfaces'
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,10 @@ export class ApiService {
 
   addDocuments(documents: Document[]): Observable<ApiResponse> {
     return this.http.request<ApiResponse>('post', `${this.url}/document`, { body: documents })
+  }
+
+  addUser(user: User): Observable<ApiResponse> {
+    return this.http.request<ApiResponse>('post', `${this.url}/user`, { body: user })
   }
 
   addTerms(terms: Term[]): Observable<ApiResponse> {
@@ -81,16 +85,16 @@ export class ApiService {
     return this.http.get<User[]>(`${this.url}/list/user?page_size=${pageSize}&page_index=${pageIndex}`)
   }
 
-  getDocuments(): Observable<Document []>{
+  getDocuments(): Observable<Document[]> {
     return this.http.get<Document[]>(`${this.url}/list/document`)
   }
 
-  removeUser(user: User): Observable<any>{
+  removeUser(user: User): Observable<any> {
     return this.http.request<ApiResponse>('delete', `${this.url}/user`, { body: user })
   }
 
-  updateUser(user: User, id): Observable<any>{
-    return this.http.request<ApiResponse>('PUT',`${this.url}/user/${id}`, { body: user })
+  updateUser(user: User, id): Observable<any> {
+    return this.http.request<ApiResponse>('PUT', `${this.url}/user/${id}`, { body: user })
   }
 
 }

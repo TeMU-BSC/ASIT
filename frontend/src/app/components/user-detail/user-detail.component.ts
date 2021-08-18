@@ -102,7 +102,6 @@ export class UserDetailComponent implements OnInit {
       }
     } else {
       updatedUser = {
-
         fullname: this.service.admin_form['value']['fullname'],
         email: this.service.admin_form['value']['email'],
         role: this.service.admin_form['value']['role'],
@@ -112,14 +111,25 @@ export class UserDetailComponent implements OnInit {
 
     if (id) {
       this.api.updateUser(updatedUser, id).subscribe(response => {
-        console.log(response)
-      })
+      }, error => { },
+        () => {
+          this.onClose(this.service.admin_form['value']);
+        })
+    } else {
+      this.api.addUser(updatedUser).subscribe(response => {
+        console.log(response);
+        this.service.admin_form['value']['_id'] = response['record']['_id']
+      }, error => { },
+        () => {
+          this.onClose(this.service.admin_form['value']);
+        })
+
     }
 
-    console.log(this.service.admin_form['value']);
 
 
-    this.onClose(this.service.admin_form['value']);
+
+
 
   }
 
