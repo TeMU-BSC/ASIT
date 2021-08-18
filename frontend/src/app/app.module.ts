@@ -11,7 +11,7 @@ import { MaterialModule } from './modules/material.module'
 import { SimplemattableModule } from 'simplemattable'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatListModule } from '@angular/material/list'
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 // Created components, pipes, interceptors
 import { AppComponent } from './app.component'
 import { HeaderComponent } from './components/header/header.component'
@@ -29,18 +29,20 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { AdminUsersComponent } from './components/admin-users/admin-users.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminDocumentsComponent } from './components/admin-documents/admin-documents.component';
 import { AdminTermsComponent } from './components/admin-terms/admin-terms.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
-import {MatTableModule} from '@angular/material/table';
-import {MatDialogModule} from '@angular/material/dialog';
-import {UserService} from './shared/user.service';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { UserService } from './shared/user.service';
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
+import { TermDetailComponent } from './term-detail/term-detail.component';
+import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +63,8 @@ import {MatSelectModule} from '@angular/material/select';
     UserDetailComponent,
     AdminDocumentsComponent,
     AdminTermsComponent,
+    TermDetailComponent,
+    MatConfirmDialogComponent,
 
   ],
   imports: [
@@ -91,7 +95,7 @@ import {MatSelectModule} from '@angular/material/select';
     UserService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [UserDetailComponent],
+  entryComponents: [UserDetailComponent, MatConfirmDialogComponent],
   exports: [
     MatFormFieldModule,
     MatInputModule,

@@ -11,7 +11,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UserDetailComponent } from "./../user-detail/user-detail.component"
 import { UserService } from './../../shared/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar'
-
+import { DialogService } from './../../shared/dialog.service';
 @Component({
   selector: 'app-admin-users',
   templateUrl: './admin-users.component.html',
@@ -47,6 +47,7 @@ export class AdminUsersComponent implements AfterViewInit {
     private dialog: MatDialog,
     public service: UserService,
     private snackBar: MatSnackBar,
+    private dialogService: DialogService,
   ) {
 
     this.dataSource = new MatTableDataSource([]);
@@ -133,26 +134,45 @@ export class AdminUsersComponent implements AfterViewInit {
 
   deleteUser(row: User) {
 
-    let index = this.dataSource.data.indexOf(row);
-    this.dataSource.data.splice(index, 1);
-    this.dataSource._updateChangeSubscription();
+    //User answer from the dialog confirm.
+    let answer = false;
+    let message = "Are you sure you want to delete " + row['fullname'];
+    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(res => {
+      answer = res
+    },
+      error => { },
+      () => {
+        if (answer) {
 
-    // Emulate term removal.
-    const snackBarRef = this.snackBar.open('User deleted.', 'Undo')
+          let index = this.dataSource.data.indexOf(row);
+          this.dataSource.data.splice(index, 1);
+          this.dataSource._updateChangeSubscription();
 
-    // If the action button of snackbar is clicked, the term is not removed.
-    snackBarRef.onAction().subscribe(() => {
-      this.dataSource.data.splice(index, 0, row);
-      this.dataSource._updateChangeSubscription();
-      this.snackBar.open('User was not deleted.', 'OK', { duration: 5000 })
-    })
+          // Emulate term removal.
+          const snackBarRef = this.snackBar.open('User deleted.', 'Undo')
 
-    // Otherwise, if the the the snackbar is closed by timeout, the term is sent to the backend to be deleted.
-    snackBarRef.afterDismissed().subscribe(info => {
-      if (!info.dismissedByAction) {
-        this.api.removeUser(row).subscribe()
-      }
-    })
+          // If the action button of snackbar is clicked, the term is not removed.
+          snackBarRef.onAction().subscribe(() => {
+            this.dataSource.data.splice(index, 0, row);
+            this.dataSource._updateChangeSubscription();
+            this.snackBar.open('User was not deleted.', 'OK', { duration: 5000 })
+          })
+
+          // Otherwise, if the the the snackbar is closed by timeout, the term is sent to the backend to be deleted.
+          snackBarRef.afterDismissed().subscribe(info => {
+            if (!info.dismissedByAction) {
+              this.api.removeUser(row).subscribe()
+            }
+          })
+
+        }
+      },
+
+
+    );
+
+
+
 
   }
 
