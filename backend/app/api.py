@@ -208,6 +208,14 @@ def delete_many(item):
             message = f'{item}s deleted successfully'
         else:
             message = 'something went wrong'
+    if collection == "terms":
+        term = request.json
+        deletion_result = mongo.db[collection].delete_one(
+            {'code': term.get('code')})
+        if deletion_result.acknowledged:
+            message = f'{item}s deleted successfully'
+        else:
+            message = 'something went wrong'
     else:
         documents = request.json
         identifiers = [document.get('identifier') for document in documents]

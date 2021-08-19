@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { ChangeDetectionStrategy } from '@angular/core';
 import { TermService } from 'src/app/shared/term.service';
 import { TermDetailComponent } from '../term-detail/term-detail.component';
+import { DialogService } from 'src/app/shared/dialog.service';
 
 @Component({
   selector: 'app-admin-terms',
@@ -52,6 +53,7 @@ export class AdminTermsComponent implements AfterViewInit {
     private dialog: MatDialog,
     public service: TermService,
     private snackBar: MatSnackBar,
+    private dialogService: DialogService,
   ) {
     this.dataSource = new MatTableDataSource([]);
     this.refresh();
@@ -105,7 +107,21 @@ export class AdminTermsComponent implements AfterViewInit {
   }
 
   addTerm() {
-    console.log("Addterm");
+    this.service.InitializeFormGroup();
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "60%";
+    const dialogRef = this.dialog.open(TermDetailComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data['_id']) {
+          let index = this.indexOfFunc(this.dataSource.data, "_id", data['_id'])
+          this.dataSource.data.push(data)
+          this.dataSource._updateChangeSubscription();
+        }
+      }
+    );
   }
   editTerm(row: Term) {
     this.service.populateForm(row);
@@ -139,26 +155,44 @@ export class AdminTermsComponent implements AfterViewInit {
 
   deleteTerm(row: Term) {
 
-    let index = this.dataSource.data.indexOf(row);
-    this.dataSource.data.splice(index, 1);
-    this.dataSource._updateChangeSubscription();
+    //User answer from the dialog confirm.
+    let answer = false;
+    let message = "Are you sure you want to delete " + row['name'];
+    this.dialogService.openConfirmDialog(message).afterClosed().subscribe(res => {
+      answer = res
+    },
+      error => { },
+      () => {
+        if (answer) {
 
-    // Emulate term removal.
-    const snackBarRef = this.snackBar.open('Term deleted.', 'Undo')
+          let index = this.dataSource.data.indexOf(row);
+          this.dataSource.data.splice(index, 1);
+          this.dataSource._updateChangeSubscription();
 
-    // If the action button of snackbar is clicked, the term is not removed.
-    snackBarRef.onAction().subscribe(() => {
-      this.dataSource.data.splice(index, 0, row);
-      this.dataSource._updateChangeSubscription();
-      this.snackBar.open('User was not deleted.', 'OK', { duration: 5000 })
-    })
+          // Emulate term removal.
+          const snackBarRef = this.snackBar.open('Term deleted.', 'Undo')
 
-    // Otherwise, if the the the snackbar is closed by timeout, the term is sent to the backend to be deleted.
-    snackBarRef.afterDismissed().subscribe(info => {
-      if (!info.dismissedByAction) {
-        // this.api.removeUser(row).subscribe()
-      }
-    })
+          // If the action button of snackbar is clicked, the term is not removed.
+          snackBarRef.onAction().subscribe(() => {
+            this.dataSource.data.splice(index, 0, row);
+            this.dataSource._updateChangeSubscription();
+            this.snackBar.open('Term was not deleted.', 'OK', { duration: 5000 })
+          })
+
+          // Otherwise, if the the the snackbar is closed by timeout, the term is sent to the backend to be deleted.
+          snackBarRef.afterDismissed().subscribe(info => {
+            if (!info.dismissedByAction) {
+              this.api.removeTerm(row).subscribe()
+            }
+          })
+
+        }
+      },
+
+
+    );
+
+
 
   }
 

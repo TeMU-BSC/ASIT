@@ -92,6 +92,9 @@ export class ApiService {
   removeUser(user: User): Observable<any> {
     return this.http.request<ApiResponse>('delete', `${this.url}/user`, { body: user })
   }
+  removeTerm(term: Term): Observable<any> {
+    return this.http.request<ApiResponse>('delete', `${this.url}/term`, { body: term })
+  }
 
   updateUser(user: User, id): Observable<any> {
     return this.http.request<ApiResponse>('PUT', `${this.url}/user/${id}`, { body: user })
