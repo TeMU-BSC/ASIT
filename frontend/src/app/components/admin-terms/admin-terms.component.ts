@@ -9,9 +9,10 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UserDetailComponent } from "./../user-detail/user-detail.component"
-import { UserService } from './../../shared/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { ChangeDetectionStrategy } from '@angular/core';
+import { TermService } from 'src/app/shared/term.service';
+import { TermDetailComponent } from '../term-detail/term-detail.component';
 
 @Component({
   selector: 'app-admin-terms',
@@ -49,7 +50,7 @@ export class AdminTermsComponent implements AfterViewInit {
     private api: ApiService,
     public auth: AuthService,
     private dialog: MatDialog,
-    public service: UserService,
+    public service: TermService,
     private snackBar: MatSnackBar,
   ) {
     this.dataSource = new MatTableDataSource([]);
@@ -112,9 +113,10 @@ export class AdminTermsComponent implements AfterViewInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    const dialogRef = this.dialog.open(UserDetailComponent, dialogConfig);
+    const dialogRef = this.dialog.open(TermDetailComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       data => {
+        console.log(data);
         if (data['_id']) {
           let index = this.indexOfFunc(this.dataSource.data, "_id", data['_id'])
           this.dataSource.data.splice(index, 1, data);

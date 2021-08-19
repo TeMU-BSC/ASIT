@@ -28,7 +28,7 @@ export class ApiService {
     return this.http.request<ApiResponse>('post', `${this.url}/user`, { body: user })
   }
 
-  addTerms(terms: Term[]): Observable<ApiResponse> {
+  addTerms(terms: Term[] | Term): Observable<ApiResponse> {
     return this.http.request<ApiResponse>('post', `${this.url}/term`, { body: terms })
   }
 
@@ -96,5 +96,10 @@ export class ApiService {
   updateUser(user: User, id): Observable<any> {
     return this.http.request<ApiResponse>('PUT', `${this.url}/user/${id}`, { body: user })
   }
+
+  updateTerm(term: Term, id): Observable<any> {
+    return this.http.request<ApiResponse>('PUT', `${this.url}/term/${id}`, { body: term })
+  }
+
 
 }

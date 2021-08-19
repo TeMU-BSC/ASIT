@@ -41,8 +41,9 @@ import { UserService } from './shared/user.service';
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { TermDetailComponent } from './term-detail/term-detail.component';
+import { TermDetailComponent } from './components/term-detail/term-detail.component';
 import { MatConfirmDialogComponent } from './components/mat-confirm-dialog/mat-confirm-dialog.component';
+import { DocsDetailComponent } from './components/docs-detail/docs-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,6 +66,7 @@ import { MatConfirmDialogComponent } from './components/mat-confirm-dialog/mat-c
     AdminTermsComponent,
     TermDetailComponent,
     MatConfirmDialogComponent,
+    DocsDetailComponent,
 
   ],
   imports: [
@@ -95,7 +97,7 @@ import { MatConfirmDialogComponent } from './components/mat-confirm-dialog/mat-c
     UserService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [UserDetailComponent, MatConfirmDialogComponent],
+  entryComponents: [UserDetailComponent, MatConfirmDialogComponent, TermDetailComponent, DocsDetailComponent],
   exports: [
     MatFormFieldModule,
     MatInputModule,

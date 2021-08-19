@@ -48,20 +48,17 @@ export class UserDetailComponent implements OnInit {
 
 
   onClose(data) {
-
     this.service.resetAssignedUser();
     this.service.InitializeFormGroup();
     this.service.admin_form.reset();
     this.dialogRef.close(data);
   }
   onEdit() {
-
   }
 
   onClear() {
     this.service.resetAssignedUser();
     this.service.admin_form.reset();
-
     this.service.InitializeFormGroup();
     this.service.admin_form.reset();
   }
@@ -73,7 +70,6 @@ export class UserDetailComponent implements OnInit {
     }
   }
   submitData() {
-
     let id = this.service.admin_form['value']['_id']
     this.service.admin_form['value']['assigned_document_identifiers'] = typeof this.service.admin_form['value']['assigned_document_identifiers'] !== "object" ? this.service.admin_form['value']['assigned_document_identifiers'].split("\n") : [];
     if (this.service.admin_form['value']['role'] === 'validator') {
@@ -117,7 +113,7 @@ export class UserDetailComponent implements OnInit {
         })
     } else {
       this.api.addUser(updatedUser).subscribe(response => {
-        console.log(response);
+
         this.service.admin_form['value']['_id'] = response['record']['_id']
       }, error => { },
         () => {

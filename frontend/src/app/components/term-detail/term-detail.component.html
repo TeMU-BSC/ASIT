@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-11" style="font-size: 2rem; margin-top: 1rem">
+      Create/Edit Term
+    </div>
+    <div class="col-sm-1" style="float: right; margin-bottom: 1rem">
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="onClose(0)"
+        style="padding: '1rem'"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <form [formGroup]="service.term_form">
+    <div style="display: 'flex'; flex-direction: 'column'">
+      <mat-form-field appearance="fill">
+        <mat-label><Code></Code></mat-label>
+        <input formControlName="code" matInput />
+        <mat-error>This field is mandatory</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          placeholder="Definition of the term"
+          class="text-box"
+        ></textarea>
+        <mat-error>This field is mandatory</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input formControlName="name" matInput />
+        <mat-error>This field is mandatory</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Terminology</mat-label>
+        <input formControlName="terminology" matInput />
+        <mat-error>This field is mandatory</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>synonyms</mat-label>
+        <textarea
+          matInput
+          formControlName="synonyms"
+          placeholder="
+          docid0
+          docid1
+          docid2"
+          class="text-box"
+        ></textarea>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="service.term_form.invalid"
+        (click)="submitData()"
+      >
+        <mat-icon>save</mat-icon> SAVE
+      </button>
+      <!-- <button mat-raised-button color="warn" (click)="onClear()" >Clear</button> -->
+    </div>
+  </form>
+</div>
