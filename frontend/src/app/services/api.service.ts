@@ -20,7 +20,7 @@ export class ApiService {
     return this.http.get<Term[]>(`${this.url}/term?multiple=true`)
   }
 
-  addDocuments(documents: Document[]): Observable<ApiResponse> {
+  addDocuments(documents: Document[] | Document): Observable<ApiResponse> {
     return this.http.request<ApiResponse>('post', `${this.url}/document`, { body: documents })
   }
 
@@ -102,6 +102,9 @@ export class ApiService {
 
   updateTerm(term: Term, id): Observable<any> {
     return this.http.request<ApiResponse>('PUT', `${this.url}/term/${id}`, { body: term })
+  }
+  updateDoc(doc: Document, id): Observable<any> {
+    return this.http.request<ApiResponse>('PUT', `${this.url}/term/${id}`, { body: doc })
   }
 
 

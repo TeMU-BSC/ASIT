@@ -129,6 +129,7 @@ export class AdminTermsComponent implements AfterViewInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
+
     const dialogRef = this.dialog.open(TermDetailComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       data => {

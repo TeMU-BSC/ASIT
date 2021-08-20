@@ -1,1 +1,69 @@
-<p>docs-detail works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-11" style="font-size: 2rem; margin-top: 1rem">
+      Create/Edit Document
+    </div>
+    <div class="col-sm-1" style="float: right; margin-bottom: 1rem">
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="onClose(0)"
+        style="padding: '1rem'"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <form [formGroup]="service.doc_form">
+    <div style="display: 'flex'; flex-direction: 'column'">
+      <mat-form-field appearance="fill">
+        <mat-label>Identifier</mat-label>
+        <input formControlName="identifier" matInput />
+        <mat-error>This field is mandatory</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Abstract</mat-label>
+        <textarea
+          matInput
+          formControlName="abstract"
+          placeholder="Definition of the term"
+          class="text-box"
+        ></textarea>
+        <mat-error>This field is mandatory</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input formControlName="title" matInput />
+        <mat-error>This field is mandatory</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Year</mat-label>
+        <input formControlName="year" matInput />
+        <mat-error>This field is mandatory</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>source</mat-label>
+        <input formControlName="source" matInput />
+        <mat-error>This field is mandatory</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>type</mat-label>
+        <input formControlName="type" matInput />
+        <mat-error>This field is mandatory</mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="service.doc_form.invalid"
+        (click)="submitData()"
+      >
+        <mat-icon>save</mat-icon> SAVE
+      </button>
+      <!-- <button mat-raised-button color="warn" (click)="onClear()" >Clear</button> -->
+    </div>
+  </form>
+</div>

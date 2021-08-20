@@ -5,6 +5,10 @@
   white-space: nowrap;
 }
 
+.text-box {
+  min-height: 20rem;
+}
+
 table {
   width: 100%;
 }
@@ -14,7 +18,8 @@ table {
   width: 100%;
 }
 
-td, th {
+td,
+th {
   width: 25%;
 }
 
@@ -25,4 +30,3 @@ td, th {
   margin-top: 5rem;
   padding: 10px;
 }
-
