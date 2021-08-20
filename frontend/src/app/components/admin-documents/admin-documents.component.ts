@@ -125,7 +125,7 @@ export class AdminDocumentsComponent implements AfterViewInit {
 
   }
 
-  deleteDoc(row) {
+  deleteDoc(row: Document) {
 
     //User answer from the dialog confirm.
     let answer = false;
@@ -154,7 +154,9 @@ export class AdminDocumentsComponent implements AfterViewInit {
           // Otherwise, if the the the snackbar is closed by timeout, the term is sent to the backend to be deleted.
           snackBarRef.afterDismissed().subscribe(info => {
             if (!info.dismissedByAction) {
-              this.api.removeTerm(row).subscribe()
+              this.api.removeDoc(row).subscribe(response => {
+                console.log(response)
+              })
             }
           })
 

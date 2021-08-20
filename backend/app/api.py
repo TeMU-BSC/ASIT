@@ -217,17 +217,27 @@ def delete_many(item):
         else:
             message = 'something went wrong'
     else:
-        documents = request.json
-        identifiers = [document.get('identifier') for document in documents]
-        success = False
-        if isinstance(request.json, list):
-            deletion_result = mongo.db[collection].delete_many(
-                {'identifier': {'$in': identifiers}})
-            success = deletion_result.acknowledged
-        if success:
-            message = f'{item}s deleted successfully'
+        if isinstance(request.json, dict):
+            document = request.json
+            deletion_result = mongo.db[collection].delete_one(
+                {'identifier': document.get('identifier')})
+            if deletion_result.acknowledged:
+                message = f'{item}s deleted successfully'
+            else:
+                message = 'something went wrong'
         else:
-            message = 'something went wrong'
+            documents = request.json
+            identifiers = [document.get('identifier')
+                           for document in documents]
+            success = False
+            if isinstance(request.json, list):
+                deletion_result = mongo.db[collection].delete_many(
+                    {'identifier': {'$in': identifiers}})
+                success = deletion_result.acknowledged
+            if success:
+                message = f'{item}s deleted successfully'
+            else:
+                message = 'something went wrong'
     return jsonify(success=deletion_result.acknowledged, message=message)
 
 

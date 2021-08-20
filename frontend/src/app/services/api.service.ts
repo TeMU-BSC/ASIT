@@ -95,16 +95,18 @@ export class ApiService {
   removeTerm(term: Term): Observable<any> {
     return this.http.request<ApiResponse>('delete', `${this.url}/term`, { body: term })
   }
+  removeDoc(doc: Document): Observable<any> {
+    return this.http.request<ApiResponse>('delete', `${this.url}/document`, { body: doc })
+  }
 
   updateUser(user: User, id): Observable<any> {
     return this.http.request<ApiResponse>('PUT', `${this.url}/user/${id}`, { body: user })
   }
-
   updateTerm(term: Term, id): Observable<any> {
     return this.http.request<ApiResponse>('PUT', `${this.url}/term/${id}`, { body: term })
   }
   updateDoc(doc: Document, id): Observable<any> {
-    return this.http.request<ApiResponse>('PUT', `${this.url}/term/${id}`, { body: doc })
+    return this.http.request<ApiResponse>('PUT', `${this.url}/document/${id}`, { body: doc })
   }
 
 
