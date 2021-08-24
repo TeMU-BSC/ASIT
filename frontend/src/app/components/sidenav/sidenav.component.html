@@ -3,7 +3,6 @@
   [class.example-is-mobile]="mobileQuery.matches"
   *ngIf="shouldRun"
 >
-
   <mat-sidenav-container
     class="example-sidenav-container"
     [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
@@ -24,18 +23,18 @@
           <mat-icon>
             {{ nav.icon }}
           </mat-icon>
+          <span>-</span>
           {{ nav.name }}
         </a>
       </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <button  mat-icon-button (click)="sidenav.toggle()">
+      <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
 
-      <p *ngFor="let content of fillerContent">{{ content }}</p>
-      <div *ngIf="fillerContent[0] == 'Home'">
+      <div *ngIf="fillerContent[0] == 'Advanced'">
         <div
           fxLayout="column"
           fxLayoutAlign="start start"

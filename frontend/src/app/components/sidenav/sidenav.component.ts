@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MediaMatcher} from '@angular/cdk/layout';
-import {ChangeDetectorRef, OnDestroy} from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service'
 import { externalLink } from 'src/app/helpers/constants'
 import { NodeWithI18n } from '@angular/compiler';
@@ -35,10 +35,11 @@ export class SidenavComponent implements OnInit {
 
   //fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
   fillerNav = [
-    {name:"Home",route:"",icon:"home"},
-    {name:"Terms",route:"",icon:"label"},
-    {name:"Docs",route:"",icon:"article"},
-    {name:"Users",route:"",icon:"manage_accounts"}
+    { name: "Home", route: "", icon: "home" },
+    { name: "Terms", route: "", icon: "label" },
+    { name: "Docs", route: "", icon: "article" },
+    { name: "Users", route: "", icon: "manage_accounts" },
+    { name: "Advanced", route: "", icon: "settings" }
   ];
 
 
@@ -56,7 +57,7 @@ export class SidenavComponent implements OnInit {
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,public auth: AuthService,private snackBar: MatSnackBar,public api: ApiService,) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public auth: AuthService, private snackBar: MatSnackBar, public api: ApiService,) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -65,20 +66,22 @@ export class SidenavComponent implements OnInit {
   ngOnInit(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
-  changeContent(nav){
+  changeContent(nav) {
     switch (nav) {
       case "Home":
         this.fillerContent = ["Home"];
         break;
-        case "Terms":
-          this.fillerContent = ["Terms"];
+      case "Terms":
+        this.fillerContent = ["Terms"];
         break;
-        case "Docs":
-          this.fillerContent = ["Docs"];
+      case "Docs":
+        this.fillerContent = ["Docs"];
         break;
-        case "Users":
-          this.fillerContent = ["Users"];
+      case "Users":
+        this.fillerContent = ["Users"];
         break;
+      case "Advanced":
+        this.fillerContent = ["Advanced"];
       default:
 
         break;
@@ -98,58 +101,58 @@ export class SidenavComponent implements OnInit {
     )
   }
 
-   /**
-   * Set the content of the uploaded file to the 'dataFromFile' property.
-   * @param event JSON file upload
-   */
-    onFileSelected(event) {
-      this.selectedFile = event.target.files[0]
-      const fileReader = new FileReader()
-      fileReader.readAsText(this.selectedFile, 'UTF-8')
-      fileReader.onloadend = () => this.dataFromFile = JSON.parse(fileReader.result as string)
-      fileReader.onerror = error => console.error(error)
-    }
-    insertDocs() {
-      this.api.addDocuments(this.dataFromFile as Document[]).subscribe(
-        response => this.response = response,
-        error => console.error(error),
-        () => {
-          if (this.response.success) {
-            this.snackBar.open(`Documentos añadidos correctamente.`, 'Vale')
-          } else {
-            this.snackBar.open(`Error: ${this.response.message}. Por favor, revisa el formato JSON del fichero.`, 'Vale')
-          }
+  /**
+  * Set the content of the uploaded file to the 'dataFromFile' property.
+  * @param event JSON file upload
+  */
+  onFileSelected(event) {
+    this.selectedFile = event.target.files[0]
+    const fileReader = new FileReader()
+    fileReader.readAsText(this.selectedFile, 'UTF-8')
+    fileReader.onloadend = () => this.dataFromFile = JSON.parse(fileReader.result as string)
+    fileReader.onerror = error => console.error(error)
+  }
+  insertDocs() {
+    this.api.addDocuments(this.dataFromFile as Document[]).subscribe(
+      response => this.response = response,
+      error => console.error(error),
+      () => {
+        if (this.response.success) {
+          this.snackBar.open(`Documentos añadidos correctamente.`, 'Vale')
+        } else {
+          this.snackBar.open(`Error: ${this.response.message}. Por favor, revisa el formato JSON del fichero.`, 'Vale')
         }
-      )
-    }
+      }
+    )
+  }
 
-    insertTerms() {
-      this.api.addTerms(this.dataFromFile as Term[]).subscribe(
-        response => this.response = response,
-        error => console.error(error),
-        () => {
-          if (this.response.success) {
-            this.snackBar.open(`Terminos añadidos correctamente.`, 'Vale')
-          } else {
-            this.snackBar.open(`Error: ${this.response.message}. Por favor, revisa el formato JSON del fichero.`, 'Vale')
-          }
+  insertTerms() {
+    this.api.addTerms(this.dataFromFile as Term[]).subscribe(
+      response => this.response = response,
+      error => console.error(error),
+      () => {
+        if (this.response.success) {
+          this.snackBar.open(`Terminos añadidos correctamente.`, 'Vale')
+        } else {
+          this.snackBar.open(`Error: ${this.response.message}. Por favor, revisa el formato JSON del fichero.`, 'Vale')
         }
-      )
-    }
+      }
+    )
+  }
 
-    deleteDocs() {
-      this.api.deleteDocuments(this.dataFromFile as Document[]).subscribe(
-        response => this.response = response,
-        error => console.error(error),
-        () => {
-          if (this.response.success) {
-            this.snackBar.open(`Documentos eliminados correctamente.`, 'Vale')
-          } else {
-            this.snackBar.open(`Error: ${this.response.message}. Por favor, revisa el formato JSON del fichero.`, 'Vale')
-          }
+  deleteDocs() {
+    this.api.deleteDocuments(this.dataFromFile as Document[]).subscribe(
+      response => this.response = response,
+      error => console.error(error),
+      () => {
+        if (this.response.success) {
+          this.snackBar.open(`Documentos eliminados correctamente.`, 'Vale')
+        } else {
+          this.snackBar.open(`Error: ${this.response.message}. Por favor, revisa el formato JSON del fichero.`, 'Vale')
         }
-      )
-    }
+      }
+    )
+  }
 
   shouldRun = true;
 

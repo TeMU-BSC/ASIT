@@ -44,6 +44,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { TermDetailComponent } from './components/term-detail/term-detail.component';
 import { MatConfirmDialogComponent } from './components/mat-confirm-dialog/mat-confirm-dialog.component';
 import { DocsDetailComponent } from './components/docs-detail/docs-detail.component';
+import { UserWorkComponent } from './components/user-work/user-work.component';
+import { UsersListComponent } from './components/users-list/users-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +69,8 @@ import { DocsDetailComponent } from './components/docs-detail/docs-detail.compon
     TermDetailComponent,
     MatConfirmDialogComponent,
     DocsDetailComponent,
+    UserWorkComponent,
+    UsersListComponent,
 
   ],
   imports: [
