@@ -1,3 +1,4 @@
+import { Input, OnChanges } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,11 +6,18 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './user-work.component.html',
   styleUrls: ['./user-work.component.scss']
 })
-export class UserWorkComponent implements OnInit {
+export class UserWorkComponent implements OnChanges {
 
   constructor() { }
-
+  @Input() selectedUser;
   ngOnInit(): void {
+  }
+  user: any;
+
+
+  ngOnChanges() {
+    this.user = this.selectedUser.name;
+    console.log(this.selectedUser)
   }
 
 }

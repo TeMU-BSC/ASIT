@@ -35,7 +35,7 @@ export class SidenavComponent implements OnInit {
 
   //fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
   fillerNav = [
-    { name: "Home", route: "", icon: "home" },
+    { name: "Statistics", route: "", icon: "analytics" },
     { name: "Terms", route: "", icon: "label" },
     { name: "Docs", route: "", icon: "article" },
     { name: "Users", route: "", icon: "manage_accounts" },
@@ -67,25 +67,7 @@ export class SidenavComponent implements OnInit {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
   changeContent(nav) {
-    switch (nav) {
-      case "Home":
-        this.fillerContent = ["Home"];
-        break;
-      case "Terms":
-        this.fillerContent = ["Terms"];
-        break;
-      case "Docs":
-        this.fillerContent = ["Docs"];
-        break;
-      case "Users":
-        this.fillerContent = ["Users"];
-        break;
-      case "Advanced":
-        this.fillerContent = ["Advanced"];
-      default:
-
-        break;
-    }
+    this.fillerContent = [nav]
   }
   registerUsers() {
     this.auth.registerUsers(this.dataFromFile as User[]).subscribe(

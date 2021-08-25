@@ -46,6 +46,7 @@ import { MatConfirmDialogComponent } from './components/mat-confirm-dialog/mat-c
 import { DocsDetailComponent } from './components/docs-detail/docs-detail.component';
 import { UserWorkComponent } from './components/user-work/user-work.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,6 +72,7 @@ import { UsersListComponent } from './components/users-list/users-list.component
     DocsDetailComponent,
     UserWorkComponent,
     UsersListComponent,
+    StatisticsComponent,
 
   ],
   imports: [
